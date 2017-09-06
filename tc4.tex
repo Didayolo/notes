@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{here}
 
 \title{Notes TC4}
 \author{Adrien Pavao}
@@ -18,10 +20,13 @@
 \begin{itemize}
 \item \textbf{Variable aléatoire :} Une fonction définie depuis l'ensemble des résultats possibles d'une expérience aléatoire, dont on doit pouvoir déterminer la probabilité qu'elle prenne une valeur donnée ou un ensemble donné de valeurs. 
 
-Discrete, continue
+Cette variable peut être discrète ou continue.
 
-Fonction de masse
-Fonction de densité
+Dans le cas d'une variable discrète, la fonction masse est la fonction qui donne la probabilité d'un résultat élémentaire d'une expérience.
+
+Dans le cas d'une variable continue, la distribution de la masse de probabilité est caracterisée par la densité de probabilité f(x) : 
+
+$ P(a < X \leq b)  = \displaystyle \int_{a}^{b} f(x) \, \mathrm{d}x  $
 
 \item \textbf{Réalisations :} Les réalisations d'une variable aléatoire sont les résultats des valeurs choisies au hasard en fonction de la loi de probabilité de la variable. On les appelle également les variations aléatoires.
 
@@ -39,24 +44,69 @@ Fonction de densité
 
 \begin{itemize}
 
-\item \textbf{Probabilité jointe :} Probabilité d'une configuration donnée. 
-\item \textbf{Probabilité conditionnelle :} Game sachant game (formule) 
-\item \textbf{Probabilité marginale :} Game (formule)
+\item \textbf{Probabilité jointe :} Probabilité d'une configuration donnée. On note $P(X, Y)$. Il s'agit de la probabilité de la réalisation de l'évenement X \textbf{et} de l'évenement Y.
+
+\item \textbf{Probabilité conditionnelle :} La probabilité de X sachant Y se note $P(X|Y)$. Pour faire simple, on fixe la variable connue.
+
+$ P(X|Y) = \frac{P(X, Y)}{P(Y)} $
+ 
+\item \textbf{Probabilité marginale :} On vire une variable en la sommant. A partir de $P(X = x, Y = y)$, on peut obtenir :
+
+$ P(X = x) = \sum_{y} P(X = x, Y = y) $
 
 \end{itemize}
 
-La probabilité jointe inclus les deux autres. (formule)
+La probabilité jointe inclus les deux autres. On peut retrouver la distribution jointe à partir de la distribution conditionnelle et
+marginale.
+
+
+\subsection{Moyenne, variance, covariance et corrélation}
+
+Soit $x_1$, $x_2$, ..., $x_n$ un ensemble de valeurs générées par une distribution de probabilité inconnue. On peut caractériser cette distribution par : 
+
+\begin{itemize}
+\item La moyenne, qui caractérise le \textbf{centre} de la distribution.
+
+$ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i $
+
+\item La variance, qui mesure la \textbf{dispersion} de la distribution.
+
+$ \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^{2} $
+
+\item La symétrie ou l'asymétrie (skewness).
+
+\begin{figure}[H]
+   \caption{Schéma représentatif de la skewness}
+    \begin{center} \includegraphics[scale=0.4]{skewness.png} \end{center}
+\end{figure}
+
+\item La variance.
+
+$ var(x) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x})^2 $
+
+\item La covariance, le lien entre les variations de deux variables.
+
+$ cov(x, y) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x}) (y_n - \bar{y}) $
+
+\item La corrélation, une covariance normalisée. Elle quantifie la qualité de l'approximation linéaire de x par y, et reciproquement.
+
+$ cor(x, y) = \frac{cov(x, y)}{var(x) var(y)} = \frac{cov(x, y)}{cov(x, x) cov(y, y)} $
+
+\end{itemize}
 
 \subsection{Indépendance statistique}
 
-Covariance tanani
-
 \begin{itemize}
 
-\item \textbf{Variables indépendantes :} jointe a * b
-\item \textbf{Variables conditionnellement indépedantes :} (formule)
+\item \textbf{Variables indépendantes :} Deux variables sont indépendantes si et seulement si :
 
-\item \textbf{Indépendantes et identiquement distribuées (i.i.d) :} game
+$ P(X = x, Y = y) = P(X = x) \times P(Y = y) $
+
+\item \textbf{Variables conditionnellement indépendantes :} Deux variables sont conditionnellement indépendantes si et seulement si :
+
+$ P(X = x, Y = y | Z = z) = P(X = x | Z = z) \times P(Y = y | Z = z) $
+
+\item \textbf{Indépendantes et identiquement distribuées (i.i.d) :} Ce dit de deux variables indépendantes suivant la même loi de probabilité.
 
 \end{itemize}
 
@@ -64,7 +114,9 @@ Covariance tanani
 
 \begin{itemize}
 
-\item \textbf{Théorème de Bayes :} (Formulus)
+\item \textbf{Théorème de Bayes :}
+
+$ P(Y = y_j | X = x_i) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{\sum_{y_j \in A_y} P(X = x_i | Y = y_j) P(Y = y_j)}  $
 
 \end{itemize}
 

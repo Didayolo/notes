@@ -34,7 +34,9 @@ $ P(a < X \leq b)  = \displaystyle \int_{a}^{b} f(x) \, \mathrm{d}x  $
 
 \item \textbf{Inférence :} Trouver la valeur des v.a. à partir d'autres qui sont connues.
 
-\item \textbf{Estimation :} Retrouver les paramètres d'une distribution à partir de l'observation d'un ensemble de réalisations de celle-ci.
+\item \textbf{Vraisemblance :} $P(D; \Theta)$ avec D les données d'estimation et $\Theta$ l'ensemble des paramètres.
+
+\item \textbf{Estimation :} Retrouver les paramètres d'une distribution à partir de l'observation d'un ensemble de réalisations de celle-ci. Il s'agit du maximum de vraisemblance.
 
 \item \textbf{Sampling :} Générer des données.
 
@@ -94,6 +96,8 @@ $ cor(x, y) = \frac{cov(x, y)}{var(x) var(y)} = \frac{cov(x, y)}{cov(x, x) cov(y
 
 \end{itemize}
 
+-- manque des games -- 
+
 \subsection{Indépendance statistique}
 
 \begin{itemize}
@@ -106,20 +110,50 @@ $ P(X = x, Y = y) = P(X = x) \times P(Y = y) $
 
 $ P(X = x, Y = y | Z = z) = P(X = x | Z = z) \times P(Y = y | Z = z) $
 
-\item \textbf{Indépendantes et identiquement distribuées (i.i.d) :} Ce dit de deux variables indépendantes suivant la même loi de probabilité.
+\item \textbf{Indépendantes et identiquement distribuées (i.i.d) :} Ce dit de deux variables indépendantes suivant la même loi de probabilité. Il sera souvent nécessaire de poser cette hypothèse. On en déduit : $P(X_{1, N} ) = \prod_{1}^{N} P(X_i)$
 
 \end{itemize}
 
-\subsection{Bayes}
+\subsection{Théorème de Bayes}
 
 \begin{itemize}
 
-\item \textbf{Théorème de Bayes :}
+\item $ P(Y = y_j | X = x_i) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{\sum_{y_j \in A_y} P(X = x_i | Y = y_j) P(Y = y_j)}  $
 
-$ P(Y = y_j | X = x_i) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{\sum_{y_j \in A_y} P(X = x_i | Y = y_j) P(Y = y_j)}  $
+\item $ P(Y = y_j | X = x_j) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{P(X = x_i)} $
 
 \end{itemize}
 
+\subsection{Lois de probabilités courantes}
+
+\begin{tabular}{|l|c|l|}
+  \hline
+  Loi & Formule & Paramètres \\
+  \hline
+  Bernouilli & tkt & p \\
+  Binomiale & tkt & n, p \\
+  Normale & tkt & $\bar{m}$, $\sigma$ \\
+  Poisson & tkt & $\lambda$ \\
+  \hline
+\end{tabular}
+
+
+\section{Classification bayésienne}
+
+Soit les points suivantes:
+
+-- manque des games --
+
+\begin{itemize}
+\item Variable aléatoire X, une observation à classer.
+\item Variable aléatoire Y, désignant la classe à affecter à X.
+\item Décision $\alpha_i$, affectation de x à la classe $y = i$.
+\item Fonction de perte $\lambda(\alpha_i | j)$, décision $\alpha_i$ alors que la classe correcte était j.
+\end{itemize}
+
+Sur l'observation x, l'espérance du risque de décider $\alpha_i$ est : 
+
+$ R(\alpha_i | x) = \sum_{j = 1}^{k} \lambda(\alpha_i | j) P(Y = j | x) $
 
 \end{document}
 

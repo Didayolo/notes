@@ -67,13 +67,23 @@ marginale.
 Soit $x_1$, $x_2$, ..., $x_n$ un ensemble de valeurs générées par une distribution de probabilité inconnue. On peut caractériser cette distribution par : 
 
 \begin{itemize}
-\item La moyenne, qui caractérise le \textbf{centre} de la distribution.
+\item La \textbf{moyenne}, qui caractérise le \textbf{centre} de la distribution.
 
 $ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i $
 
-\item La variance, qui mesure la \textbf{dispersion} de la distribution.
+\item La \textbf{variance}, qui mesure la \textbf{dispersion} de la distribution.
 
-$ \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^{2} $
+\begin{itemize}
+
+\item $ \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^{2} $
+
+\item $ var(x) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x})^2 $
+
+\end{itemize}
+
+\item L'\textbf{écart-type}, qui est la racine carrée de la variance.
+
+$\sigma = \sqrt{var(x)}$
 
 \item La symétrie ou l'asymétrie (skewness).
 
@@ -82,9 +92,6 @@ $ \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^{2} $
     \begin{center} \includegraphics[scale=0.4]{skewness.png} \end{center}
 \end{figure}
 
-\item La variance.
-
-$ var(x) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x})^2 $
 
 \item La covariance, le lien entre les variations de deux variables.
 
@@ -94,9 +101,11 @@ $ cov(x, y) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x}) (y_n - \bar{y}) $
 
 $ cor(x, y) = \frac{cov(x, y)}{var(x) var(y)} = \frac{cov(x, y)}{cov(x, x) cov(y, y)} $
 
+
 \end{itemize}
 
--- manque des games -- 
+
+Pour les V.A. multidimensionnelles, on a la \textbf{matrice de covariance}.
 
 \subsection{Indépendance statistique}
 
@@ -126,23 +135,24 @@ $ P(X = x, Y = y | Z = z) = P(X = x | Z = z) \times P(Y = y | Z = z) $
 
 \subsection{Lois de probabilités courantes}
 
-\begin{tabular}{|l|c|l|}
+\begin{tabular}{|l|l|c|l|}
   \hline
-  Loi & Formule & Paramètres \\
+  Loi & Type de la V.A. & Formule & Paramètres \\
   \hline
-  Bernouilli & tkt & p \\
-  Binomiale & tkt & n, p \\
-  Normale & tkt & $\bar{m}$, $\sigma$ \\
-  Poisson & tkt & $\lambda$ \\
+  Bernouilli & Binaire & $p^x(1-p)^{1-x}$ & p \\
+  Binomiale & Discrète & $C^{k}_{n} \times p^k \times (1-p)^{n-k}$ & n, p \\
+  Poisson &Discrète & $\frac{\lambda^k}{k!} \times e^{- \lambda} $ & $\lambda$ \\
+  Normale dimension 1 & Continue & $\frac{1}{\sigma \sqrt{2 \pi}} \times e^{\frac{-1}{2}(\frac{x - \mu}{\sigma})^2} $ & $\mu$, $\sigma$ \\
+  Normale dimension d & Continue& $\frac{1}{(2 \pi)^{\frac{d}{2}} ||\Sigma||^{\frac{1}{2}}} \times e^{- \frac{1}{2} (x - \mu)^t \Sigma^{-1} (x - \mu)}$ & $\mu$, $\Sigma$ \\ 
   \hline
 \end{tabular}
 
 
 \section{Classification bayésienne}
 
-Soit les points suivantes:
+Note : A completer.
 
--- manque des games --
+Soit les points suivantes:
 
 \begin{itemize}
 \item Variable aléatoire X, une observation à classer.

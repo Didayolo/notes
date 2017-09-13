@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{here}
+
+\title{Notes TC4}
+\author{Adrien Pavao}
+\date{September 2017}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Inférence Bayesienne}
+
+Différents niveaux d'inférence...
+
+\subsection{Niveau 1 : Classification Bayesienne}
+
+\begin{itemize}
+\item Y : La classe à prédire (catégorielle)
+\item $\vec{X}$ : Vecteur aléatoire, $\vec{X} = (x1 ... x2)$ (vertical) (tous les X et x qui viennent son des vecteurs)
+\end{itemize}
+
+On cherche à choisir y de façon à maximiser : 
+
+$ P(Y=y | \vec{X} = \vec{x}) = \frac{P(\vec{X} = \vec{x} | Y=y)P(Y=y)}{P(\vec{X} = \vec{x})}  $
+
+Dans cette formule, on remarque des termes particuliers : 
+
+\begin{itemize}
+
+\item La \textbf{vraisemblance} : $P(\vec{X} = \vec{x} | Y = y)$.
+\item L'\textbf{a priori} : $P(Y = y)$.
+\item L'\textbf{évidence} : $P(\vec{X} = \vec{x})$.
+
+\end{itemize}
+
+La vraisemblance et l'a priori sont à estimer. On estime une ditribution sur X pour chaque classe y.
+On peut donc faire l'hypothèse naïve suivante : 
+
+$P(\vec{X}=\vec{x} | Y=y) = \Pi_{i=1}^{d} P(\vec{X}_i = \vec{x}_i | Y = y)$
+
+\subsubsection*{Estimer les paramètres}
+
+Cas Bernouilli : $\Theta_{iy} = \frac{n(1, i, y)}{N(i, y)}$
+
+$ n(1, i, y) =$ nombre de fois où $X_i = 1$ dans la classe y.
+
+Si $n(1, i, y) = 0$ alors $\Theta_{iy} = 0$
+Donc $P(X = x | Y = y) = 0$, ce qui est mauvais. On estime $\Theta$ sur les données et on vient à la conclusion qu'un evenement est impossible sous pretexte qu'on ne l'a jamais observé. Il faut éviter ce problème.
+
+Ce type d'estimation est appelée une estimation MLE : Maximum Likelihood Estimate. Il s'agit de l'interprétation \textbf{fréquentiste} des données.
+
+Autrement dit, on cherche les paramètres $\Theta_{iy}$ qui maximisent $P(D | \Theta_{iy})$. (D la réalisation des données ..)
+
+\subsection{Niveau 2 : Inférence Bayesienne des paramètres}
+
+On cherche $P(X_i | Y)$ -> $P(X_i | Y_i \Theta_{iy})$. L'apprentissage revient à l'estimation d'une distribution sur les paramètres.
+
+Estimer $ P(\Theta_{iy} | D) $.
+
+$ P(\Theta_{iy} | D) = \frac{P(D | \Theta_{iy})P(\Theta_{iy})}{P(D)} $
+
+\subsubsection{A priori sur les paramètres}
+
+Cas Bernouilli : $\Theta_{iy} \in [0, 1]$, continu. Donc $P(\Theta_{iy})$ \_ une loi continue de support $[0, 1]$.
+Le choix : Loi Beta.
+
+$P(\Theta_{iy}; \alpha_0, \alpha_1) = \frac{\Gamma (\alpha_0 + \alpha_1)}{\Gamma (\alpha_0) \Gamma (\alpha_1)} \Theta_{iy}^{\alpha_1 - 1} (1 - \Theta_{iy})^{\alpha_0 - 1}  $
+
+(Dénominateur et game -> Normalisation)
+
+$\alpha_0$ et $\alpha_1$ sont les paramètres de la loi Beta. On a $\alpha_0, \alpha_1 > 0, \in R$ (R reel, D majuscule ...)
+
+\begin{itemize}
+\item \textbf{Fonction de densité symétrique : }
+$\alpha_0 = \alpha_1$ et $\alpha_0, \alpha_1 > 1$.
+
+Graphe 1
+
+\item \textbf{A priori non-informatif : }
+
+$\alpha_0 = \alpha_1 = 1$.
+
+Graphe 2
+
+\item \textbf{A priori parcimonieux (sparse) : }
+
+$\alpha_0, \alpha_1 < 1$
+
+Graphe 3
+
+\end{itemize}
+
+\subsubsection{A posteriori sur les paramètres}
+
+$ P(\Theta_{iy} | D)$ gamealpha $P(D | \Theta_{iy}) P(\Theta_{iy}; \alpha_1, \alpha_0)$ (vraimsemblance et a priori).
+gamealpha -> proportionnel à
+$ P(\Theta_{iy} | D)$ propor $\Theta_{iy}^{N_1 + \alpha_1 - 1} (1 - \Theta_{iy})^{N_0 + \alpha_0 - 1}$
+
+\begin{itemize}
+\item $N_0$ : Nombre de $x_i$ à 0 dans D.
+\item $N_1$ : Nombre de $x_i$ à 1 dans D.
+\end{itemize}
+
+(defition importante)
+La loi a posteriori est comme la loi a priori, une loi Beta. La loi Beta est l'a priori \textbf{conjugué} de Bernouilli (conjugated prior).
+
+\subsubsection{Retour à la classification}
+
+\begin{enumerate}
+
+\item \textbf{Maximum a Posteriori des Paramètres (MAP)}
+
+$ \Theta_{iy} = argmax P(\Theta_{iy} | D) $ ( chapeau sur le theta ! )
+$ \Theta_{iy} = \frac{N_1 + \alpha_1 - 1}{N_1 + N_0 + \alpha_1 + \alpha_0 - 2} $
+
+$\alpha_1$ et $\alpha_0$ agissent comme des "pseudo-comptes". Lissage (smoothing) de distibution.
+$\Theta_{iy} != 0$
+Si $N_1, N_0 >> \alpha_1, \alpha_0$ alors l'a priori est négligeable.
+
+-> Régularisation, eviter le sur-apprentissage.
+
+\item \textbf{Loi prédictive (inférence Bayesienne 3)}
+
+$P(X_i = x_i | Y = y; \Theta_{iy})$ avec $\Theta_{iy}$ estimés à partir des données (MAP).
+
+Le paramètre n'existe pas et ne doit donc pas apparaitre dans la prédiction. La vraie prédiction :
+
+$P(X_i = x_i | D) = integrale01 P(X_i = x_i; \Theta_{iy} | D) d \Theta_{iy}$, en marginalisant les paramètres.
+
+$P(X_i; \Theta_{iy} | D) = P(X_i | \Theta_{iy}; D) P(\Theta_{iy} | D)$ (vraisemblance et a priori).
+
+$ P(X_i = x_i | D) = \frac{N_1 + \alpha_1}{N_1 + N_0 + \alpha_1 + \alpha_0}$, $Pourtout \alpha_1$ et $\alpha_0 > 0$.
+
+\end{enumerate}
+
+\end{document}
+

@@ -26,7 +26,7 @@ Dans le cas d'une variable discrète, la fonction masse est la fonction qui donn
 
 Dans le cas d'une variable continue, la distribution de la masse de probabilité est caracterisée par la densité de probabilité f(x) : 
 
-$ P(a < X \leq b)  = \displaystyle \int_{a}^{b} f(x) \, \mathrm{d}x  $
+\[ P(a < X \leq b)  = \displaystyle \int_{a}^{b} f(x) \, \mathrm{d}x \]
 
 \item \textbf{Réalisations :} Les réalisations d'une variable aléatoire sont les résultats des valeurs choisies au hasard en fonction de la loi de probabilité de la variable. On les appelle également les variations aléatoires.
 
@@ -50,11 +50,11 @@ $ P(a < X \leq b)  = \displaystyle \int_{a}^{b} f(x) \, \mathrm{d}x  $
 
 \item \textbf{Probabilité conditionnelle :} La probabilité de X sachant Y se note $P(X|Y)$. Pour faire simple, on fixe la variable connue.
 
-$ P(X|Y) = \frac{P(X, Y)}{P(Y)} $
+\[ P(X|Y) = \frac{P(X, Y)}{P(Y)} \]
  
 \item \textbf{Probabilité marginale :} On vire une variable en la sommant. A partir de $P(X = x, Y = y)$, on peut obtenir :
 
-$ P(X = x) = \sum_{y} P(X = x, Y = y) $
+\[ P(X = x) = \sum_{y} P(X = x, Y = y) \]
 
 \end{itemize}
 
@@ -69,17 +69,15 @@ Soit $x_1$, $x_2$, ..., $x_n$ un ensemble de valeurs générées par une distrib
 \begin{itemize}
 \item La \textbf{moyenne}, qui caractérise le \textbf{centre} de la distribution.
 
-$ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i $
+\[ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i \]
 
 \item La \textbf{variance}, qui mesure la \textbf{dispersion} de la distribution.
 
-\begin{itemize}
 
-\item $ \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^{2} $
+\[ \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^{2} \]
 
-\item $ var(x) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x})^2 $
+\[ var(x) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x})^2 \]
 
-\end{itemize}
 
 \item L'\textbf{écart-type}, qui est la racine carrée de la variance.
 
@@ -95,11 +93,11 @@ $\sigma = \sqrt{var(x)}$
 
 \item La covariance, le lien entre les variations de deux variables.
 
-$ cov(x, y) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x}) (y_n - \bar{y}) $
+\[ cov(x, y) = \frac{1}{N} \sum_{n=1}^{N} (x_n - \bar{x}) (y_n - \bar{y}) \]
 
 \item La corrélation, une covariance normalisée. Elle quantifie la qualité de l'approximation linéaire de x par y, et reciproquement.
 
-$ cor(x, y) = \frac{cov(x, y)}{var(x) var(y)} = \frac{cov(x, y)}{cov(x, x) cov(y, y)} $
+\[ cor(x, y) = \frac{cov(x, y)}{var(x) var(y)} = \frac{cov(x, y)}{cov(x, x) cov(y, y)} \]
 
 
 \end{itemize}
@@ -113,11 +111,11 @@ Pour les V.A. multidimensionnelles, on a la \textbf{matrice de covariance}.
 
 \item \textbf{Variables indépendantes :} Deux variables sont indépendantes si et seulement si :
 
-$ P(X = x, Y = y) = P(X = x) \times P(Y = y) $
+\[ P(X = x, Y = y) = P(X = x) \times P(Y = y) \]
 
 \item \textbf{Variables conditionnellement indépendantes :} Deux variables sont conditionnellement indépendantes si et seulement si :
 
-$ P(X = x, Y = y | Z = z) = P(X = x | Z = z) \times P(Y = y | Z = z) $
+\[ P(X = x, Y = y | Z = z) = P(X = x | Z = z) \times P(Y = y | Z = z) \]
 
 \item \textbf{Indépendantes et identiquement distribuées (i.i.d) :} Ce dit de deux variables indépendantes suivant la même loi de probabilité. Il sera souvent nécessaire de poser cette hypothèse. On en déduit : $P(X_{1, N} ) = \prod_{1}^{N} P(X_i)$
 
@@ -125,13 +123,9 @@ $ P(X = x, Y = y | Z = z) = P(X = x | Z = z) \times P(Y = y | Z = z) $
 
 \subsection{Théorème de Bayes}
 
-\begin{itemize}
+\[ P(Y = y_j | X = x_i) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{\sum_{y_j \in A_y} P(X = x_i | Y = y_j) P(Y = y_j)} \]
 
-\item $ P(Y = y_j | X = x_i) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{\sum_{y_j \in A_y} P(X = x_i | Y = y_j) P(Y = y_j)}  $
-
-\item $ P(Y = y_j | X = x_j) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{P(X = x_i)} $
-
-\end{itemize}
+\[ P(Y = y_j | X = x_j) = \frac{P(X = x_i | Y = y_j) P(Y = y_j)}{P(X = x_i)} \]
 
 \subsection{Lois de probabilités courantes}
 
@@ -163,7 +157,7 @@ Soit les points suivantes:
 
 Sur l'observation x, l'espérance du risque de décider $\alpha_i$ est : 
 
-$ R(\alpha_i | x) = \sum_{j = 1}^{k} \lambda(\alpha_i | j) P(Y = j | x) $
+\[ R(\alpha_i | x) = \sum_{j = 1}^{k} \lambda(\alpha_i | j) P(Y = j | x) \]
 
 \end{document}
 

@@ -3,6 +3,7 @@
 ## Cours :
 
 - TC1 : Apprentissage
+- TC2 : Optimisation
 - TC4 : Algorithmes d'inférence et d'apprentissage à grande échelle
 - TC5 : Traitement des images et du signal
 

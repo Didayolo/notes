@@ -5,3 +5,4 @@ Par A. Allauzen et J. C. Janodet.
 ## Liens :
 
 - https://allauzen.github.io/cours/Exercices_Proba/
+- https://www.ibisc.univ-evry.fr/~janodet/

@@ -6,3 +6,4 @@ Par A. Allauzen et J. C. Janodet.
 
 - https://allauzen.github.io/cours/Exercices_Proba/
 - https://www.ibisc.univ-evry.fr/~janodet/
+- https://ocsync.limsi.fr/index.php/s/TETPT57yxziIN8R

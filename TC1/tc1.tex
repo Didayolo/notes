@@ -129,7 +129,7 @@ $\alpha_1$ et $\alpha_0$ agissent comme des "pseudo-comptes". Lissage (smoothing
 $\Theta_{iy} != 0$
 Si $N_1, N_0 >> \alpha_1, \alpha_0$ alors l'a priori est négligeable.
 
--> Régularisation, eviter le sur-apprentissage.
+-> Régularisation, éviter le sur-apprentissage.
 
 \item \textbf{Loi prédictive (inférence Bayesienne 3)}
 
@@ -144,6 +144,134 @@ $P(X_i; \Theta_{iy} | D) = P(X_i | \Theta_{iy}; D) P(\Theta_{iy} | D)$ (vraisemb
 $ P(X_i = x_i | D) = \frac{N_1 + \alpha_1}{N_1 + N_0 + \alpha_1 + \alpha_0}$, $\forall \alpha_1$ et $\alpha_0 > 0$.
 
 \end{enumerate}
+
+\section{Modèles de mélange (G.M.M.)}
+
+\subsection{Introduction}
+
+Un large champ d'applications :
+
+\begin{itemize}
+
+\item \textbf{Clustering :} Apprentissage non supervisé. Par exemple, l'algorithme des K-means.
+
+\[ D = {(x_n)^N}_{n=1}  \]
+
+On fixe K, un nombre de clusters.
+
+\item \textbf{Estimation de distribution.}
+
+Exemple : La classification (d'image).
+
+Graphe 1.
+
+-> Augmenter la capacité du modèle.
+-> Augmenter le nombre de paramètres.
+
+\item \textbf{Mélange de Gaussienne (G.M.M.)}
+
+K : Le nombre de Gausiennes / clusters.
+
+\[ P(\vec{x_n} | \Theta) = \sum_{k=1}^k \pi_k N(\vec{u_k}, \Sigma_k) \]
+
+\begin{itemize}
+
+\item Les paramètres $\Theta$ : $(\pi_k, \vec{u_k}, \sum_k)_{k=1}^K$
+
+\item $\pi_k$ est le poids du mélange.
+
+\item $N(\vec{u_k}, \Sigma_k)$ est la loi gaussienne.
+
+\end{itemize}
+
+\end{itemize}
+
+L'objectif de l'apprentissage est d'estimer les paramètres du mélange permettant de :
+
+\begin{itemize}
+\item Maximiser $ \Pi_{n=1}^N  P(\vec{X} = \vec{x} | \Theta)$
+
+\item Maximiser $log(\Pi_{n=1}^N P(\vec{X} = \vec{x_n} | \Theta))$ (on retrouve la probabilité vue plus haut).
+
+\end{itemize}
+
+\subsection{Algorithme E.M.}
+
+\begin{itemize}
+
+\item Algorithme itératif qui cherche à maximiser : 
+
+\[ log(P(\vec{X} = \vec{x_n} | \Theta))  \]
+
+\item Introduire des variables \textbf{latentes} (cachées) : 
+
+\begin{itemize}
+
+\item Pour chaque $\vec{x} -> \vec{Z}$ (one-hot vecteur)
+\item $\vec{Z} = (0, 0, ..., 1, 0, 0) -> Z_k = 1 <=> \vec{x} \in cluster k$
+\item $\vec{Z}$ : 
+\begin{itemize}
+\item Pseudo-affectation
+\item Un vecteur latent
+\item Inconnu => $\vec{Z}$ un vecteur aléatoire
+\item Affectation "soft" : Un point peut appartenir à tous les clusters.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+Résumé du programme : 
+
+Introduction $\vec{Z}$ associé à $\vec{X}$. Si on souhaite maximiser : 
+\[ P(X | \Theta) = \sum_Z P(\vec{X}, \vec{Z} | \Theta) \]
+\[ P(X | \Theta) = \sum_Z P(\vec{X} | \vec{Z}, \Theta) P(\vec{Z} | \Theta) \]
+
+On note que $P(X | Z, \Theta)$ est la loi normale $N(\vec{u_k}, \Sigma_k)$ et que $P(\vec{Z} | \Theta)$ est $\pi_k$.
+
+Si $\vec{Z_k} = (0, ..., 1, 0) rang k$
+\begin{itemize}
+\item $(\vec{X}, \vec{Z})$ : Données complètes.
+\item $(\vec{X})$ : Données incomplètes.
+\end{itemize}
+
+\textbf{Etape E(xpection) : }
+\begin{itemize}
+\item Connaitre $\vec{Z}$ à $\Theta$ \textbf{fixé}.
+\item Calcul la probabilité d'affectation : $P(\vec{Z} |, \vec{X}, \Theta)$
+\end{itemize}
+
+\textbf{Etape M(aximization) :} Les données sont incomplètes. On calcule $\Theta$ et on "fixe" $\vec{Z}$.
+
+\subsection{Optimisation variationnelle}
+
+Après l'introduction de $\vec{Z}$, on introduit une distribution auxiliaire sur $\vec{Z}$, notée $q(\vec{Z})$. On souhaite maximiser selon $\Theta$ : 
+
+\[ log(P(X | \Theta) = \sum_{\vec{Z}} q(\vec{Z} log(\frac{P(\vec{X}, \vec{Z} | \Theta)}{q(\vec{Z})} ) - \sum_{\vec{Z}} q(\vec{Z} log(\frac{P(\vec{Z} | \vec{X}, \Theta)}{q(\vec{Z})} ) \]
+
+\[ log(P(X | \Theta)) = log(P(X, Z | \Theta)) - log(P(Z | X, \Theta)) \]
+
+Rappel : $P(X | \Theta) = \frac{P(X, Z | \Theta)}{P(Z | X, \Theta)}$
+
+C'est-à-dire : Le second terme : 
+
+\[ - \sum_{\vec{Z}} q(\vec{Z} log(\frac{P(\vec{Z} | \vec{X}, \Theta)}{q(\vec{Z})} ) = E_{\vec{Z}vq(\vec{Z})} [log(\frac{P(\vec{Z}, \vec{X} | \Theta}{q(\vec{Z})})]  \]
+
+Divergence de Kullback-Leibler (DKL).
+
+\[ DKL(q(\vec{Z}) || P(\vec{Z} | \vec{X}, \Theta)) \]
+
+De chaque côté du "$||$" on a deux distributions sur $\vec{Z}$.
+
+Divergence $\ne$ distance (asymétrique). (faire une phrase...)
+\begin{itemize}
+\item $DKL(q, P) = 0$ ssi $q = P$
+\item $DKL(q, P) \geq 0$ 
+\end{itemize}
+
+Le premier terme : $E_{\vec{Z}vq(\vec{Z})} [log(\frac{P(\vec{Z}, \vec{X} | \Theta}{q(\vec{Z})})] $ est nommé ELBO (Evidence Lower Bound).
+
+\[ log(P(\vec{X} | \Theta)) = L(\Theta, q) + DKL(q(\vec{Z}) || P(\vec{Z} | \vec{X}, \Theta))  \]
+
+On a $L(\Theta, q)$ une borne inférieure (ELBO). On fait une optimisation par borne inférieure : on maximise la fonction en maximisant sa borne inférieure. Il s'agit d'une maximisation "indirecte".
 
 \end{document}
 

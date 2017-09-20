@@ -25,7 +25,7 @@ Hint: On se souviendra que lorsque l'ordinateur calcule une TFD on a: Des fréqu
 
 On testera le programme pour de petites valeurs, p. ex. T_x=1/2, T_y=0 et de plus plus grandes valeurs et tachera d'expliquer ce que l'on constate.
 
-  - Écrire un programme mettant en oeuvre: le zoom par zero padding (TFD).
+   - Écrire un programme mettant en oeuvre: le zoom par zero padding (TFD).
 
 Entrée: une image et le facteur de zoom (entier). Sortie: l'image zoomée. Tester et critiquer la méthode pour un zoom de 2 et/ou 4 par exemple.
 

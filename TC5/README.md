@@ -3,7 +3,7 @@
 Par Yohann Tendero.
 Contact : yohann.tendero@telecom-paristech.fr
 
-### Liens :
+## Liens :
 
 - http://perso.telecom-paristech.fr/%7Eytendero
 - http://perso.telecom-paristech.fr/%7Eytendero/master_aic.html
@@ -16,7 +16,7 @@ Contact : yohann.tendero@telecom-paristech.fr
 - Les exercices : http://perso.telecom-paristech.fr/%7Eytendero/documents_aic_2017/exercice_2.pdf (à rendreavant le matin du 22)
 - Le TP : 
 
--- Écrire un programme mettant en oeuvre: la translation par TFD d'une image.
+  - Écrire un programme mettant en oeuvre: la translation par TFD d'une image.
 
 Entrée image, coordonnées vecteur de translation. Sortie l'image translatée.
 Tester pour une translation à coordonnées non entières (unité le pixel) de votre choix.
@@ -25,7 +25,7 @@ Hint: On se souviendra que lorsque l'ordinateur calcule une TFD on a: Des fréqu
 
 On testera le programme pour de petites valeurs, p. ex. T_x=1/2, T_y=0 et de plus plus grandes valeurs et tachera d'expliquer ce que l'on constate.
 
--- Écrire un programme mettant en oeuvre: le zoom par zero padding (TFD).
+  - Écrire un programme mettant en oeuvre: le zoom par zero padding (TFD).
 
 Entrée: une image et le facteur de zoom (entier). Sortie: l'image zoomée. Tester et critiquer la méthode pour un zoom de 2 et/ou 4 par exemple.
 

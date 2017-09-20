@@ -104,8 +104,8 @@ Graphe 3
 
 \subsubsection{A posteriori sur les paramètres}
 
-$ P(\Theta_{iy} | D)$ gamealpha $P(D | \Theta_{iy}) P(\Theta_{iy}; \alpha_1, \alpha_0)$ (vraimsemblance et a priori).
-gamealpha -> proportionnel à
+$ P(\Theta_{iy} | D)$ propor $P(D | \Theta_{iy}) P(\Theta_{iy}; \alpha_1, \alpha_0)$ (vraimsemblance et a priori).
+gamealpha signifie "proportionnel à".
 $ P(\Theta_{iy} | D)$ propor $\Theta_{iy}^{N_1 + \alpha_1 - 1} (1 - \Theta_{iy})^{N_0 + \alpha_0 - 1}$
 
 \begin{itemize}
@@ -165,8 +165,10 @@ Exemple : La classification (d'image).
 
 Graphe 1.
 
--> Augmenter la capacité du modèle.
--> Augmenter le nombre de paramètres.
+\begin{itemize}
+\item Augmenter la capacité du modèle.
+\item Augmenter le nombre de paramètres.
+\end{itemize}
 
 \item \textbf{Mélange de Gaussienne (G.M.M.)}
 
@@ -267,12 +269,24 @@ Divergence $\ne$ distance (asymétrique). (faire une phrase...)
 \item $DKL(q, P) \geq 0$ 
 \end{itemize}
 
-Le premier terme : $E_{\vec{Z}vq(\vec{Z})} [log(\frac{P(\vec{Z}, \vec{X} | \Theta}{q(\vec{Z})})] $ est nommé ELBO (Evidence Lower Bound).
+Le premier terme : $ E_{\vec{Z} v q(\vec{Z})} [log(\frac{P(\vec{Z}, \vec{X} | \Theta}{q(\vec{Z})}))] $ est nommé ELBO (Evidence Lower Bound).
 
 \[ log(P(\vec{X} | \Theta)) = L(\Theta, q) + DKL(q(\vec{Z}) || P(\vec{Z} | \vec{X}, \Theta))  \]
 
 On a $L(\Theta, q)$ une borne inférieure (ELBO). On fait une optimisation par borne inférieure : on maximise la fonction en maximisant sa borne inférieure. Il s'agit d'une maximisation "indirecte".
 
+\textbf{Etape E :} 
+\begin{itemize}
+\item Les paramètres sont fixés : $\Theta = \Theta^{old}$
+\item Maximiser $L(\Theta^{old}, q)$
+
+\[ L(\Theta^{old}, q) = - DKL(q(\vec{Z}), P(\vec{Z} | \vec{X}, \Theta^{old})) + log (P(\vec{X} | \Theta^{old})) \]
+\[ q(\vec{Z}) = P(\vec{Z} | \vec{X}, \Theta^{old})  \]
+
+\textbf{Etape M :} Maximiser L selon $\Theta$ avec q fixé.
+
+ILLUSTRATION..
+\end{itemize}
 \end{document}
 
 

@@ -104,9 +104,10 @@ Graphe 3
 
 \subsubsection{A posteriori sur les paramètres}
 
-$ P(\Theta_{iy} | D)$ propor $P(D | \Theta_{iy}) P(\Theta_{iy}; \alpha_1, \alpha_0)$ (vraimsemblance et a priori).
-gamealpha signifie "proportionnel à".
-$ P(\Theta_{iy} | D)$ propor $\Theta_{iy}^{N_1 + \alpha_1 - 1} (1 - \Theta_{iy})^{N_0 + \alpha_0 - 1}$
+\[ P(\Theta_{iy} | D) \propto P(D | \Theta_{iy}) P(\Theta_{iy}; \alpha_1, \alpha_0) \] (vraimsemblance et a priori).
+\[ P(\Theta_{iy} | D) \propto \Theta_{iy}^{N_1 + \alpha_1 - 1} (1 - \Theta_{iy})^{N_0 + \alpha_0 - 1} \]
+
+$\propto$ signifie "proportionnel à".
 
 \begin{itemize}
 \item $N_0$ : Nombre de $x_i$ à 0 dans D.

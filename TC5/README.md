@@ -33,6 +33,6 @@ Contact : yohann.tendero@telecom-paristech.fr
 
   Pour une image couleur on traitera chaque canal indépendamment.
 
-###Pour le 29/09 :
+### Pour le 29/09 :
 
 - Les exercices de la feuille 3 :http://perso.telecom-paristech.fr/~ytendero/documents_aic_2017/exercice_3.pdf

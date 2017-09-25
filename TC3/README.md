@@ -6,8 +6,8 @@ Par A. L. Ligozat
 
 - https://annlor.github.io/
 
-##TODO :
+## TODO :
 
-###Pour le 27/09 :
+### Pour le 27/09 :
 
 - Le tp1 : https://annlor.github.io/ens/aic/2017/09/20/aic-tp1.html

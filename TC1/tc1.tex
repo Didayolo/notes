@@ -14,6 +14,22 @@
 
 \tableofcontents
 
+\section{Rappel}
+
+\subsection{Espérance}
+
+Soit une variable aléatoire X, l'espérance : $E[X] = \sum_{x \in A_x} P(X = x) \times x$
+
+Exemple si X suit une loi $N(\mu, \sigma)$ GRAPHE (loi normale)
+
+$E[X] = \mu$
+
+Pour une variable discrète, ce n'est pas toujours pertinent. De même pour des variables qualitatives plutôt que quantitatives. On préfère donc définir une fonction de cette variable alétoire, et l'espérance de cette fonction. Cela permet de "donner du sens". Ainsi :
+
+\[ E[f(X)] = \sum_x P(X = x) \times f(x) \]
+
+X dépend de la distribution tirée sur la variable aléatoire. On note X (vague) P.
+
 \section{Inférence Bayesienne}
 
 Différents niveaux d'inférence...
@@ -288,6 +304,65 @@ On a $L(\Theta, q)$ une borne inférieure (ELBO). On fait une optimisation par b
 
 ILLUSTRATION..
 \end{itemize}
+
+\subsection{Suite du cours}
+
+(A joindre à la subsection algorithme EM ?)
+
+L'algorithme E.M. est un algorithme d'optimisation. \\
+
+\textbf{1.}
+
+\[ log P(\vec{X} = \vec{x} | \Theta) = \sum_Z q(Z = z) log \frac{P(\vec{X} = \vec{x}, Z = z)}{q(Z = z)} - \sum_{Z = z} q(Z) log \frac{P(Z | X}{q(Z)} \]
+\[ log P(\vec{X} = \vec{x} | \Theta) = E_{Z (vague) q} [ log \frac{P(X, Z)}{q(Z)} - E_{Z (vague) q} [log \frac{P(Z | X)}{q(Z)}]  ] \]
+
+\textbf{q} est la distribution auxiliaire. \\
+Dans la soustraction : 
+\begin{itemize}
+\item Premier terme : \textbf{classification sachant Z}. On l'optimise dans l'étape M.
+\item Deuxième terme : \textbf{réalisme}. On l'optimise dans l'étape E.
+\end{itemize}
+
+\textbf{2. Etape E}
+
+\begin{itemize}
+
+\item Pour chaque $\vec{x}_n$, on calcule sa probabilité d'affectation avec $\Theta$ fixés.
+
+\[ P(Z = k | \vec{X} = \vec{x}_n) = \frac{\pi_k \times N(\vec{u}_k, \sum_k)}{\sum_{k' = 1}^{k} \pi k' \times N(\vec{u}_k', \sum_{k'}  } \]
+
+\item Objectif : $P(Z | \vec{x}; \Theta_{old}) (fleche) q(Z)$
+
+\end{itemize}
+
+\textbf{3. Etape M}
+
+Optimiser un classifieur selon les données qui sont représentées par $q(Z)$ (la fonction auxiliaire). Si on note $a_{nk} = P(Z = k | \vec{x}_n; \Theta_{old})$,
+la probabilité d'un cluster :
+
+\[ P(Z = k) = \pi_k = \frac{1}{N} = \sum_n a_{nk} = \frac{N_k}{N} \] 
+
+N est le "nombre d'exemple".
+
+\[ \vec{u}_k = \frac{1}{N} \sum_n a_{nk} \vec{x}_n \]
+
+Qu'est-ce que $a_{nk}$ ? (pas compris)
+
+\[ \sum_k = \sum_n (\vec{x}_n - \vec{\mu}_k) (\vec{x}_n - \vec{\mu}_k) ^{t}  \]
+
+On peut obtenir un nouveau jeu de paramètres $\Theta_{new}$
+
+\textbf{4. Algo E.M.}
+
+\begin{enumerate}
+\item Initialisation des paramètres $(\pi_k, \vec{\mu}_k, \sum_k)_{k = 1}^{k}$
+\item E : Calcul des "$a_{nk}$" $ | \Theta$
+\item M : Calcul de $\Theta | $ "$a_{nk}$"
+\end{enumerate}
+
+On boucle entre les étapes 2 et 3 (en général une dizaine de fois) puis l'agorithme se termine.
+
+
 \end{document}
 
 

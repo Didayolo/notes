@@ -307,10 +307,13 @@ ILLUSTRATION..
 
 \subsection{Suite du cours}
 
-(A joindre à la subsection algorithme EM ?)
-
-L'algorithme E.M. est un algorithme d'optimisation. \\
-
+(A joindre à la subsection algorithme EM ?) \\
+\textbf{Remarques :}
+\begin{itemize}
+\item L'algorithme E.M. est un algorithme d'optimisation.
+\item Il augmente notre fonction objectif $P(\vec{X} | \Theta)$ à chaque itération. Si on a un extremum local, on ne va pas maximiser la fonction car on sera bloqué. On ne sortira pas de l'extremum local.
+\item De plus, cet algorithme est dépendant des conditions initiales (étape 1 plus bas).
+\end{itemize}
 \textbf{1.}
 
 \[ log P(\vec{X} = \vec{x} | \Theta) = \sum_Z q(Z = z) log \frac{P(\vec{X} = \vec{x}, Z = z)}{q(Z = z)} - \sum_{Z = z} q(Z) log \frac{P(Z | X}{q(Z)} \]
@@ -361,7 +364,6 @@ On peut obtenir un nouveau jeu de paramètres $\Theta_{new}$
 \end{enumerate}
 
 On boucle entre les étapes 2 et 3 (en général une dizaine de fois) puis l'agorithme se termine.
-
 
 \end{document}
 

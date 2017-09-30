@@ -28,7 +28,7 @@ Pour une variable discrète, ce n'est pas toujours pertinent. De même pour des 
 
 \[ E[f(X)] = \sum_x P(X = x) \times f(x) \]
 
-X dépend de la distribution tirée sur la variable aléatoire. On note X (vague) P.
+X dépend de la distribution tirée sur la variable aléatoire. On note $X \sim P$.
 
 \section{Inférence Bayesienne}
 
@@ -317,7 +317,7 @@ ILLUSTRATION..
 \textbf{1.}
 
 \[ log P(\vec{X} = \vec{x} | \Theta) = \sum_Z q(Z = z) log \frac{P(\vec{X} = \vec{x}, Z = z)}{q(Z = z)} - \sum_{Z = z} q(Z) log \frac{P(Z | X}{q(Z)} \]
-\[ log P(\vec{X} = \vec{x} | \Theta) = E_{Z (vague) q} [ log \frac{P(X, Z)}{q(Z)} - E_{Z (vague) q} [log \frac{P(Z | X)}{q(Z)}]  ] \]
+\[ log P(\vec{X} = \vec{x} | \Theta) = E_{Z \sim q} [ log \frac{P(X, Z)}{q(Z)} - E_{Z \sim q} [log \frac{P(Z | X)}{q(Z)}]  ] \]
 
 \textbf{q} est la distribution auxiliaire. \\
 Dans la soustraction : 

@@ -5,7 +5,7 @@
 
 \title{Notes TC4}
 \author{Adrien Pavao}
-\date{September 2017}
+\date{Septembre 2017}
 
 \begin{document}
 
@@ -158,6 +158,151 @@ Soit les points suivantes:
 Sur l'observation x, l'espérance du risque de décider $\alpha_i$ est : 
 
 \[ R(\alpha_i | x) = \sum_{j = 1}^{k} \lambda(\alpha_i | j) P(Y = j | x) \]
+
+\section{Modèles de Markov Cachés (H.M.M.)}
+
+\subsection{Introduction et exemple}
+
+\subsubsection{Robotique} 
+
+Un robot doit détecter votre état. 
+\begin{itemize}
+
+\item 1 V.A. y : état de la personne, $A_y = {t^0, h^1}$ \\
+      La variable à inférer.
+
+\item Le robot reçoit une observation $X(1 V.A.)$, $A_x = {dormir, pleurer, tv, manger, tw}$\\
+      Le but est d'estimer $P(Y = y | X = x)$
+
+\end{itemize}
+
+\subsubsection{Un modèle simple} 
+
+Classification Bayésienne. On doit estimer $P(X = x, Y = y) = P(X = x | Y = y) P(Y = y)$
+
+$P(X = x | Y = y)$, l'observation qu'on peut représenter par un tableau : 
+\begin{tabular}{|l|l|l|l|l|l|}
+  \hline
+  - & d & p & t & m & t \\
+  \hline
+  0 & 0, 1 & 0, 2 & 0, 5 & 0, 1 & 0, 1 \\
+  1 & 0, 2 & 0, 1 & 0, 2 & 0, 2 & 0, 3 \\
+  \hline
+\end{tabular}
+
+La somme de chaque ligne doit être égal à 1. 
+
+$P(Y = y)$, l'a priori en Y.
+
+Etat caché Y $\rightarrow$ Observation X.
+
+\subsubsection{Un modèle dynamique} 
+
+Modéliser l'évolution au cours du temps (discret). On prend en compte les transitions et dépendances entre états.
+
+\textbf{Modification.} 
+\begin{itemize}
+\item $Y_t$ : l'état est situé dans le temps.
+\item $X_t$ : l'état est situé dans le temps.
+\end{itemize}
+
+Schema mytho.
+
+Impact de cette hypothèse sur les paramètres : 
+\begin{itemize}
+\item Distribution sur les observations : $P(X_t | Y_t)$
+\item Distribution sur les transitions : $P(Y_t | Y_{t - 1})$
+      \begin{tabular}{|l|l|l|}
+        \hline
+        $Y_t, Y_{t-1}$ & 0 & 1 \\
+        \hline
+        0 & 0,99 & 0,1 \\
+        1 & 0,01 & 0,9 \\
+        \hline
+      \end{tabular}
+
+Schema automate.
+
+\item Distribution (de l'état) initiale : $P(Y_1)$
+\end{itemize}
+
+\subsection{Définition d'un H.M.M}
+
+Un modèle H.M.M. (Hidden Markov Model) : 
+\begin{itemize}
+\item L'ensemble des états S (N états possibles)
+\item L'ensemble des observations : $A_x$
+\item A chaque instant t (temps discret) :
+  \begin{itemize}
+  \item Changer d'état d'après une distribution de transition $Y_{t-1 \rightarrow Y_t}$
+  \item Engendrer une observation : $Y_t \rightarrow X_t$
+  \end{itemize}
+\item A partir d'un état initiale $Y_1$ 
+\end{itemize}
+
+Les donnée associées : ((séquence d'obervations), (séquence d'états))
+\begin{itemize}
+\item 2 séquences de même longueur
+\item On observe un modèle de Markov sur T instants. $(X_{1:T}, Y_{1:T})$ \\ $ X_{1:T} = (X_1, X_2, ..., X_T) $
+\end{itemize}
+
+\subsubsection{Hypothèses Markoviennes}
+
+Un H.M.M. définit une distribution sur $P(X_{1:T}, Y_{1:T}) = P(X_1, ..., X_T, Y_1, ..., Y_T)$
+
+\[ P(X_{1:T}, Y_{1:T}) = P(X_{1:T} | Y_{1:T}) P(Y_{1:T})  \]
+
+\begin{itemize}
+\item Observations : $P(X_{1:T} | Y_{1:T})$
+\item Transitions : $P(Y_{1:T})$
+\end{itemize}
+
+Schema mytho. \\
+
+\textbf{Hypothèse de Markov 1 :} L'état $Y_t$ ne dépend que de l'état précédent. \\
+
+Formellement, on a :
+
+\[ P(Y_{1:T}) = P(Y_1) \times P(Y_2 | Y_1) \times P(Y_3 | Y_1, Y_2) \times ... \times P(Y_T | Y_1, Y_2, ..., Y_{T-1}) \]
+
+Mais l'hypothèse de Markov, bien que souvent fausse, permet de simplifier grandement ce calcul de probabilité. Ainsi, on a :
+
+\[ P(Y_{1:T}) = P(Y_1) \times P(Y_2 | Y_1) \times ... \times P(Y_T | Y_{T-1}) \]
+
+\textbf{Hypothèse de Markov 2 :} L'observation $X_t$ ne dépend que de $Y_t$. \\
+
+Normalement, on a :
+
+\[ P(X_{1:T} | Y_{1:T}) = P(X_1 | Y_{1:T}) \times P(X_2 | X_1, Y_{1:T}) \times ... \times P(X_T | X_{1:T-1}, Y_{1:T}) \]
+
+En appliquant l'hypothèse, souvent fausse également, on obtient :
+
+\[ P = \Pi_{t = 1}^{T} P(X_t | Y_t)  \]
+
+\subsubsection{Stationarité}
+
+$ \forall t$ : $P(X_t | Y_t)$ et $P(Y_t | Y_{t - 1})$ sont inchangées.
+
+\subsubsection{Les paramètres}
+Les paramètres sur un modèle de Markov sont : 
+
+\begin{itemize}
+\item Une distribution initiale : $|S|$
+\item Une distribution de transitions : $|S|^2$
+\item Une distribution d'observations : $|A_x| \times |S|$
+\end{itemize}
+
+On les représente par des matrices. On nomme la matrice de transitions A et la matrice d'observations B.
+
+\subsection{Applications}
+
+\begin{itemize}
+\item Reconnaissance de la parole, Tracking vidéo, Reconnaissance optique de caractères, finance et prédiction de marché.
+\item P.O.S. Tagging (Part of Speech) (NLP)
+\item Apprentissage supervisé : $D_S = ((X_{1:T}), (Y_{1:T}))$. Un H.M.M. est un modèle génératif.
+\item Apprentissage non supervisé, car c'est un modèle génératif. On induit les clusters (classes). $D_N = (X_{1:T})$
+\item Apprentissage semi-supervisé, grâce aux deux précédents : $D = D_S + D_N$.
+\end{itemize}
 
 \end{document}
 

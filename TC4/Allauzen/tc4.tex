@@ -304,5 +304,58 @@ On les représente par des matrices. On nomme la matrice de transitions A et la 
 \item Apprentissage semi-supervisé, grâce aux deux précédents : $D = D_S + D_N$.
 \end{itemize}
 
+\subsection{Inférence}
+
+La question d'inférence : $ P(Y_i | X_{1:i}$ ?
+
+Si on reprend l'exemple du robot : $P(Y_3 = t | X_{1:4} = (r, tw, P))$
+
+\subsubsection{Enumération}
+
+$$ P(Y_3 | X_{1:3}) = \sum_{y y} P(Y_1 = y1, Y_2 = y_2, Y_3 = y_3 | X_1:3) $$
+$$ P(Y_3 | X_{1:3}) = \frac{P(X_{1:3}, Y_{1:3})}{P(X_{1:3})} $$
+
+\subsubsection{Algorithme forward}
+
+$$ P(Y_{1:i} | X_{1:k} = \frac{\alpha(i, k)}{\sum_{j \ in S} \alpha(j, k)} $$
+\\
+Le dénominateur est la normalisation à 1.
+\\
+On utilisation pour la représentation une matrice. Chaque ligne représente un état, et chaque colonne un instant dans le temps.
+
+\textbf{Calcul de $\alpha(i, k)$ :} Arriver à l'instant k dans l'état i.
+$$ \alpha(i, k) = P(Y_{k:i}, X_{1:k}) $$
+$$ \alpha(i, k) = P(X_1, X_2, ..., X_k, Y_k) $$
+$$ \alpha(i, k) = P(X_k | Y_k, X_{1:k-1}) \times P(Y_k, X_{1:k-1})$$
+
+\textbf{Calcul de $P(Y_k, X_{1:k-1})$ :}
+
+$$ P(Y_k, X_{1:k-1}) = \sum_j P(Y_k, Y_{k-1:j}, X_{1:k-1}) $$
+$$ [...] $$
+$$ P(Y_k, X_{1:k-1}) = \sum_j \alpha(i ,j) \times \alpha(j, k-1) $$
+
+\textbf{Conclusion :}
+
+$$ \alpha(i, k) = b(x_k, i) \times \sum_{j \in S} [\alpha(i, j) \times \alpha(j, k-1)] $$
+
+%% SCHEMA MYTHO 
+
+L'\textbf{algorithme forward} consiste à calculer $\alpha(i, k)$. En voici les étapes : 
+\begin{enumerate}
+\item Création d'une matrice $M$ de taille $(|S|, k)$.
+\item Initialiser la première colonne : $\alpha(i, 1) = \pi(i) \times b(x_1, i) $.
+\item Pour $k' = 2$ à $k$ : Remplir la colonne $k'$ : $\alpha(i, k')$
+\item Utilisation des $\alpha$.
+    \begin{enumerate}
+    \item \textbf{Prédiction} : $P(Y_{k:i} | X_{1:k}) = \frac{\alpha(i, k)}{\sum_j \alpha(j, k)}$
+    \item \textbf{Evidence/Normalisation} : $P(X_{1:k}) = \sum_j \alpha(j, k)$
+    \end{enumerate}
+\item \textbf{Viterbi} : \\
+Question : $y_{1:k}$ qui maximise $P(Y_{1:k} | X_{1:k})$, \\
+Définir $\delta(i, k)$ la probabilité du  meilleur chemin permettant d'arriver à l'instant \textbf{k'} dans l'état \textbf{i}.
+$$ \delta(i, k) = b(x_k, i) \times max_{j \in S} [ \alpha(i, j) \delta(j, k-1) ] $$
+$$ \psi(i, k) = b(x_k, i) \times argmax [ \alpha(i, j) \delta(j, k-1) ] $$
+\end{enumerate}
+
 \end{document}
 

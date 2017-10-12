@@ -15,3 +15,7 @@ Par A. L. Ligozat
 ### Pour le 5/10 :
 
 - Le tp2 : https://annlor.github.io/ens/aic/2017/09/28/aic-tp2.html
+
+### Pour le 17/10 :
+
+- Le tp3 : https://annlor.github.io/ens/aic/2017/10/12/aic-tp3.html

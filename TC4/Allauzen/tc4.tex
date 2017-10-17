@@ -315,7 +315,7 @@ Si on reprend l'exemple du robot : $P(Y_3 = t | X_{1:4} = (r, tw, P))$
 $$ P(Y_3 | X_{1:3}) = \sum_{y y} P(Y_1 = y1, Y_2 = y_2, Y_3 = y_3 | X_1:3) $$
 $$ P(Y_3 | X_{1:3}) = \frac{P(X_{1:3}, Y_{1:3})}{P(X_{1:3})} $$
 
-\subsubsection{Algorithme forward}
+\subsubsection{Algorithme Forward}
 
 $$ P(Y_{1:i} | X_{1:k} = \frac{\alpha(i, k)}{\sum_{j \ in S} \alpha(j, k)} $$
 \\
@@ -357,5 +357,98 @@ $$ \delta(i, k) = b(x_k, i) \times max_{j \in S} [ \alpha(i, j) \delta(j, k-1) ]
 $$ \psi(i, k) = b(x_k, i) \times argmax [ \alpha(i, j) \delta(j, k-1) ] $$
 \end{enumerate}
 
+\subsubsection{Algorithme Backward}
+
+A l'instant t, le modèle est dans l'état $Y_t = i$
+
+\[ P(X_{t+1 : T} | Y_t = i) = \beta(i, t) \]
+
+\[ \beta(i, t) = \sum_j \beta(j, t+1) a(j, i) b(x_{t+1}, j) \]
+
+L'objectif est maintenant de calculer la matrice des '$\beta$' $(|S|, T)$ :
+\begin{itemize}
+\item On initialise : $\beta(i, T) = 1$
+\item Récurrence de droite à gauche pour $t = (T-1):1$. On remarque que cela se fait de droite à gauche dans le cas de l'algorithme Backward.
+\end{itemize}
+Application : 
+$$ P(X_{1:T}) = \sum_j \beta(j, 1) \pi(j) b(x_1, j) $$
+
+\subsection{Forward - Backward}
+
+\subsubsection{Décodage 'a posteriori' ou 'par position'}
+
+L'objectif est d'inférer pour : $$X_{1:T} : Y_{1:T}$$ 
+
+Pour chaque instant t : $$ y_t^* = argmax_{y_t} P(Y_t = g_t | X_{1:T}) $$
+
+On cherche donc : $$P(Y_t = i | X_{1:T}) \propto P(Y_t = i, X_{1:T}) $$
+
+$$ P(Y_t = i | X_{1:T}) \propto P(Y_t = i | X_{t+1:T}) \times P(X_{t+1:T} | Y_{t=i}, X_{1:T}) $$
+
+On simplifie et on obtient : $$ P(Y_t = i | X_{1:T}) = \frac{\alpha(i, t) \beta(i, t)}{\sum_j \alpha(j, t) \beta(j, t)} $$
+
+Remarque : $$ P(X_{1:T}) = \sum_j \alpha(j, t) \beta(j, t), \forall t $$
+
+\subsubsection{Apprentissage non-supervisé}
+
+\begin{itemize}
+\item On doit fixer un nombre d'états.
+\item Adapter E.M. pour les H.M.M : Baum-Welah.
+\end{itemize}
+
+$$ D = (X_{1:T}) $$ plutôt que $$ D_{sup} = (X_{1:T}, Y_{1:T}) $$
+
+Des variables cachées $ Z \rightarrow P(Z | X) $ 
+\\
+\textbf{E.M.}
+\begin{enumerate}
+\item Etape E : Calcul les pseudo-affectations
+$ P(Z | X)$ / à $\Theta$ fixé.
+\item Etape M : re-estimation des $\Theta$ à partir des pseudos-affectations
+\end{enumerate}
+
+\textbf{Distribution de l'état initial}
+\\
+E : Pour chaque état possible : 
+$$ P(Y_1 = i | X_{1:T}) = \frac{\alpha(i, 1) \beta(i, 1)}{\sum_j \alpha(j, 1) \beta(j, 1)} $$
+
+\textbf{Distribution d'observation}
+\\
+Pour une séquence $X_{1:T}$, collecter $c(k, i)$ = nombre de fois où l'observation $x_t = k$ est engendrée par l'état i.
+
+$$ \forall t : c(k, i)_t = P(Y_t = i | X_{1:T}) $$
+
+\textbf{Exemple : } Une séquence 'the', 'cat', 'is', 'running' correspond à une séquence $x_1$, $x_2$, $x_3$, $x_4$.
+
+$|S|$ = 
+\begin{tabular}{|c|c|c|c|}
+\hline
+$x_1$ & $x_2$ & $x_3$ & $x_4$ \\
+\hline
+- & - & - & - \\
+- & - & - & - \\
+- & - & $\frac{\alpha(i, t) \beta(i, t)}{\sum_j \alpha(j, t) \beta(j, t)}$ & - \\ 
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item Forward $\rightarrow \alpha$
+\item Backward $\rightarrow \beta$
+\item Combinaison + normalisation par colonne.
+\end{itemize}
+
+\textbf{Distribution des transitions}
+\\
+On aimerait $c(i, j)$
+$$ c(i, j) \rightarrow P(Y_t = i, Y_{t-1} = j | X_{1:T}), \forall t > 1 $$
+$$ P(Y_{t=i}, Y_{t-1=j} | X_{1:T}) \propto \alpha(j, t-1) \beta(i, t) a(i, j) b(x_t, i) $$
+
+\subsubsection{Remarques}
+\begin{enumerate}
+\item E.M. dépend de l'état initial.
+\item 'Etat initial'. On peut supprimer la notion d'état initial. On peut par exemple supposer un état "o", tanani...
+\end{enumerate}
+
 \end{document}
+
 

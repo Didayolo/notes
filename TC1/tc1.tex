@@ -32,7 +32,7 @@ X dépend de la distribution tirée sur la variable aléatoire. On note $X \sim 
 
 \section{Inférence Bayesienne}
 
-Différents niveaux d'inférence...
+On considère différents niveaux d'inférence.
 
 \subsection{Niveau 1 : Classification Bayesienne}
 
@@ -102,19 +102,19 @@ $\alpha_0$ et $\alpha_1$ sont les paramètres de la loi Beta. On a $\alpha_0, \a
 \item \textbf{Fonction de densité symétrique : }
 $\alpha_0 = \alpha_1$ et $\alpha_0, \alpha_1 > 1$.
 
-Graphe 1
+\includegraphics[scale=0.4]{schema1.png}
 
 \item \textbf{A priori non-informatif : }
 
 $\alpha_0 = \alpha_1 = 1$.
 
-Graphe 2
+\includegraphics[scale=0.4]{schema2.png}
 
 \item \textbf{A priori parcimonieux (sparse) : }
 
 $\alpha_0, \alpha_1 < 1$
 
-Graphe 3
+\includegraphics[scale=0.4]{schema3.png}
 
 \end{itemize}
 
@@ -180,7 +180,7 @@ On fixe K, un nombre de clusters.
 
 Exemple : La classification (d'image).
 
-Graphe 1.
+\includegraphics[scale=0.4]{schema4.png}
 
 \begin{itemize}
 \item Augmenter la capacité du modèle.
@@ -302,7 +302,10 @@ On a $L(\Theta, q)$ une borne inférieure (ELBO). On fait une optimisation par b
 
 \textbf{Etape M :} Maximiser L selon $\Theta$ avec q fixé.
 
-ILLUSTRATION..
+Illustration :
+
+\includegraphics[scale=0.4]{schema5.png}
+
 \end{itemize}
 
 \subsection{Suite du cours}

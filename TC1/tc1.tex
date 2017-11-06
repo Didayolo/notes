@@ -20,7 +20,9 @@
 
 Soit une variable aléatoire X, l'espérance : $E[X] = \sum_{x \in A_x} P(X = x) \times x$
 
-Exemple si X suit une loi $N(\mu, \sigma)$ GRAPHE (loi normale)
+Exemple si X suit une loi $N(\mu, \sigma)$ 
+
+\includegraphics[scale=0.4]{loinormale.png}
 
 $E[X] = \mu$
 
@@ -73,15 +75,16 @@ Cas Bernouilli : $\Theta_{iy} = \frac{n(1, i, y)}{N(i, y)}$
 $ n(1, i, y) =$ nombre de fois où $\vec{X}_i = 1$ dans la classe y.
 
 Si $n(1, i, y) = 0$ alors $\Theta_{iy} = 0$
+
 Donc $P(\vec{X} = \vec{x} | Y = y) = 0$, ce qui est mauvais. On estime $\Theta$ sur les données et on vient à la conclusion qu'un evenement est impossible sous pretexte qu'on ne l'a jamais observé. Il faut éviter ce problème.
 
-Ce type d'estimation est appelée une estimation MLE : Maximum Likelihood Estimate. Il s'agit de l'interprétation \textbf{fréquentiste} des données.
+Ce type d'estimation est appelée une estimation \textbf{MLE : Maximum Likelihood Estimate}. Il s'agit de l'interprétation \textbf{fréquentiste} des données.
 
 Autrement dit, on cherche les paramètres $\Theta_{iy}$ qui maximisent $P(D | \Theta_{iy})$. (D la réalisation des données ..)
 
 \subsection{Niveau 2 : Inférence Bayesienne des paramètres}
 
-On cherche $P(X_i | Y)$ -> $P(X_i | Y_i \Theta_{iy})$. L'apprentissage revient à l'estimation d'une distribution sur les paramètres.
+On cherche $P(X_i | Y) \rightarrow P(X_i | Y_i \Theta_{iy})$. L'apprentissage revient à l'estimation d'une distribution sur les paramètres.
 
 Estimer $ P(\Theta_{iy} | D) $.
 
@@ -94,12 +97,13 @@ Le choix : Loi Beta.
 
 \[ P(\Theta_{iy}; \alpha_0, \alpha_1) = \frac{\Gamma (\alpha_0 + \alpha_1)}{\Gamma (\alpha_0) \Gamma (\alpha_1)} \Theta_{iy}^{\alpha_1 - 1} (1 - \Theta_{iy})^{\alpha_0 - 1} \]
 
-(Dénominateur et game -> Normalisation)
+(Dénominateur et game $\rightarrow$ Normalisation)
 
 $\alpha_0$ et $\alpha_1$ sont les paramètres de la loi Beta. On a $\alpha_0, \alpha_1 > 0, \in R$ (R reel, D majuscule ...)
 
 \begin{itemize}
 \item \textbf{Fonction de densité symétrique : }
+
 $\alpha_0 = \alpha_1$ et $\alpha_0, \alpha_1 > 1$.
 
 \includegraphics[scale=0.4]{schema1.png}
@@ -130,7 +134,6 @@ $\propto$ signifie "proportionnel à".
 \item $N_1$ : Nombre de $x_i$ à 1 dans D.
 \end{itemize}
 
-(defition importante)
 La loi a posteriori est comme la loi a priori, une loi Beta. La loi Beta est l'a priori \textbf{conjugué} de Bernouilli (conjugated prior).
 
 \subsubsection{Retour à la classification}
@@ -146,7 +149,7 @@ $\alpha_1$ et $\alpha_0$ agissent comme des "pseudo-comptes". Lissage (smoothing
 $\Theta_{iy} != 0$
 Si $N_1, N_0 >> \alpha_1, \alpha_0$ alors l'a priori est négligeable.
 
--> Régularisation, éviter le sur-apprentissage.
+La régularisation permet d'éviter le sur-apprentissage.
 
 \item \textbf{Loi prédictive (inférence Bayesienne 3)}
 
@@ -232,7 +235,7 @@ L'objectif de l'apprentissage est d'estimer les paramètres du mélange permetta
 \begin{itemize}
 \item Pseudo-affectation
 \item Un vecteur latent
-\item Inconnu => $\vec{Z}$ un vecteur aléatoire
+\item Inconnu : $\vec{Z}$ un vecteur aléatoire
 \item Affectation "soft" : Un point peut appartenir à tous les clusters.
 \end{itemize}
 \end{itemize}
@@ -335,7 +338,7 @@ Dans la soustraction :
 
 \item Pour chaque $\vec{x}_n$, on calcule sa probabilité d'affectation avec $\Theta$ fixés.
 
-\[ P(Z = k | \vec{X} = \vec{x}_n) = \frac{\pi_k \times N(\vec{u}_k, \sum_k)}{\sum_{k' = 1}^{k} \pi k' \times N(\vec{u}_k', \sum_{k'}  } \]
+\[ P(Z = k | \vec{X} = \vec{x}_n) = \frac{\pi_k \times N(\vec{u}_k, \sum_k)}{\sum_{k' = 1}^{k} \pi k' \times N(\vec{u}_k', \sum_{k'})  } \]
 
 \item Objectif : $P(Z | \vec{x}; \Theta_{old}) (fleche) q(Z)$
 

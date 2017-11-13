@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Rappel}{1}
+\contentsline {subsection}{\numberline {1.1}Esp\IeC {\'e}rance}{1}
+\contentsline {section}{\numberline {2}Inf\IeC {\'e}rence Bayesienne}{2}
+\contentsline {subsection}{\numberline {2.1}Niveau 1 : Classification Bayesienne}{2}
+\contentsline {subsection}{\numberline {2.2}Niveau 2 : Inf\IeC {\'e}rence Bayesienne des param\IeC {\`e}tres}{3}
+\contentsline {subsubsection}{\numberline {2.2.1}A priori sur les param\IeC {\`e}tres}{3}
+\contentsline {subsubsection}{\numberline {2.2.2}A posteriori sur les param\IeC {\`e}tres}{4}
+\contentsline {subsubsection}{\numberline {2.2.3}Retour \IeC {\`a} la classification}{5}
+\contentsline {section}{\numberline {3}Mod\IeC {\`e}les de m\IeC {\'e}lange (G.M.M.)}{5}
+\contentsline {subsection}{\numberline {3.1}Introduction}{5}
+\contentsline {subsection}{\numberline {3.2}Algorithme E.M.}{6}
+\contentsline {subsection}{\numberline {3.3}Optimisation variationnelle}{7}
+\contentsline {subsection}{\numberline {3.4}Suite du cours}{9}

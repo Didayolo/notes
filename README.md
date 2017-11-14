@@ -8,6 +8,7 @@
 - TC4 : Algorithmes d'inférence et d'apprentissage à grande échelle
 - TC5 : Traitement des images et du signal
 - OPT5 : Apprentissage par renforcement
+- OPT8 : Deep Learning
 
 ## Liens :
 

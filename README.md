@@ -7,6 +7,7 @@
 - TC3 : Traitement Automatique des Langues
 - TC4 : Algorithmes d'inférence et d'apprentissage à grande échelle
 - TC5 : Traitement des images et du signal
+- TC6 : Science des données pour le Big Data
 - OPT5 : Apprentissage par renforcement
 - OPT8 : Deep Learning
 

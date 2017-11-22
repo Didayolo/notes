@@ -4,6 +4,6 @@ Par A. Allauzen et J. C. Janodet.
 
 ## Liens :
 
-- https://allauzen.github.io/cours/Exercices_Proba/
-- https://www.ibisc.univ-evry.fr/~janodet/
-- https://ocsync.limsi.fr/index.php/s/TETPT57yxziIN8R
+- [Exercices de probabilités sur le site d'Alexandre Allauzen](https://allauzen.github.io/cours/Exercices_Proba/)
+- [Le site de Jean-Christophe Janodet](https://www.ibisc.univ-evry.fr/~janodet/)
+- [Le cloud contenant des fichiers utiles](https://ocsync.limsi.fr/index.php/s/TETPT57yxziIN8R)

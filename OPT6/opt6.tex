@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{amsmath}
+
+\title{Notes de cours\\OPT6 : Apprentissage avancé}
+\author{Adrien Pavao}
+\date{September 2017}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Apprentissage avancé. Le domaine de l'apprentissage automatique évolue vite.
+
+\subsection{Quelques notions}
+\begin{itemize}
+\item Vladimir vapnik Bases statistiques de l'apprentissage...
+\item Apprentissage PAC : Probably Approximately Correct.
+\item \textbf{No-fre-lunch theorem :} Pas de méthode d'apprentissage qui soit meilleure qui les autres. Même performance que l'aléatoire. Si on est bon sur un problème on sera mauvais sur un autre (conservation de la goniétance en gros). L'intégrale sur tous les problèmes est toujours la même, quelque soit la méthode. Pareil pour les mesures (de distance par exemple). Les méthodes sont adaptées à des classes de problèmes. \textbf{Tous les algorithmes inductifs se valent.}
+\item adversarial learning
+\item ordre l0, l1, distance manhattan.
+\item Hofstadter, "Godel, Game, Bach"
+\item Complexité de kolmogorov
+\item Effets de séquences
+\item L'algorithme d'apprentissage du perceptron converge si les données sont linéairement séparables. Cette convergence est en nombre fini d'étapes et ce nombre est indépendant du nombres d'exemples, de la distribution des exemples, et quasiment pas de la dimension de l'espace d'entrée. Il dépend de la marge de séparation des nuages de points et du diamètre de la boule.
+\item L'espace des version : Toutes les hypothèses correctes (qui ne font pas d'erreurs) d'après les données d'apprentissage.
+\end{itemize}
+
+\section{Induction}
+
+On déduit à partir d'un échantillon.
+
+\begin{enumerate}
+\item Espace d'hypothèse.
+\item Critere inductif $ S \times h \in H \rightarrow $ Score E R. Par exemple minimiser le taux d'erreur.
+\item Methode d'exploration de H.
+\end{enumerate}
+
+On ne dispose pas de théorie bien établie de l'induction (exemple fibonacci).
+
+\subsection{Différents types d'apprentissage}
+\begin{itemize}
+\item \textbf{Descriptif :} Non supervisé. On cherche des régularités dans les données. On ne souhaite pas extrapoler, on ne s'interesse qu'à l'échantillon de données dont on dispose. La "matière noire" de l'apprentissage.
+\item \textbf{Prédictif :} Supervisé. L'échantillon de données sert à apprendre une hypothèse sur les données pour prédire ensuite sur de nouvelles données. On cherche des corrélations entre les données.
+\item \textbf{Prescriptif :} On cherche des \textbf{causalités}. Il s'agit d'une tâche difficile.
+\end{itemize}
+
+Les frontières entre ces types d'apprentissage peuvent être floues, on peut par exemple commencer par une description des données pour les comprendre avant de faire un modèle prédictif.
+
+\subsection{Différentes méthodes d'apprentissage}
+
+\begin{itemize}
+
+\item Méthodes d'ensemble
+
+\item Supervisé (?)
+
+\item L'induction :
+    \begin{itemize}
+    \item Apprentissage semi supervisé 
+    \item Apprentissage de modèles parcimonieux (peu de paramètres).
+    \end{itemize}
+
+\item Apprentissage en ligne
+
+\item \textbf{Apprentissage par transfert :} Cela vise à transférer des connaissances d'une ou plusieurs tâches sources vers une ou plusieurs tâches cibles. On peut le voir comme la capacité d’un système à reconnaître et appliquer des connaissances et des compétences, apprises à partir de tâches antérieures, sur de nouvelles tâches ou domaines partageant des similitudes.
+
+\end{itemize}
+
+\subsection{Types de biais}
+
+L'induction necessite d'être biaisé, d'avoir une preference pour certaines hypothèses, de ne pas connaitre toutes les fonctions possibles
+
+\begin{itemize}
+\item \textbf{Biais de représentation (déclaratif) :} On ne peut représenter qu'un petit nombre de fonctions possibles. Le langage dans lequel on exprime le problème ne me permet pas de tout représenter.
+\item \textbf{Biais de recherche (procédural) :} La procédure de recherche avantage certaines hypothèses. Par exemple on reste proche de notre point initial de recherche dans l'espace des fonctions possibles.
+\end{itemize}
+
+Souvent un peu des deux.
+
+\subsection{Risques}
+
+On distingue deux types de risques :
+
+\begin{itemize}
+\item \textbf{Risque réel} (ce que l'on veut minimiser). La performance à venir si j'utilise l'hypothèse h. Cela prend la forme d'une espérance de coût d'usage de h. On ne le risque réel $R(h) = $ sale formule voir cours (loss function). Meilleure hypothèse $k\star = Argmin R(h)$ avec $h \in H$.
+\item \textbf{Risque empirique}. $R(h) = \frac{1}{m}$ R chapeau sale formule voir cours. h chapeau minimise risque empirique.
+\end{itemize}
+
+On cherche les liens entre toutes ces notions.
+
+\section{Transduction}
+
+On ne s'interesse qu'à un point. Le nombre de données requises pour tirer une conclusion n'est plus influencé par le nombre de dimension. On parle de \textbf{transductif learning}.
+\begin{itemize}
+\item Transduction : cas d'induction limite (une question).
+\item Analogie : cas de transduction limite (un exemple).
+\end{itemize}
+\end{document}
+
+

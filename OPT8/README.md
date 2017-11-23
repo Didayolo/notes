@@ -1,6 +1,6 @@
 # OPT8 : Deep Learning
 
-Par A. Allauzen et M. Sebag
+Par Alexandre Allauzen et Michèle Sebag.
 
 ### Liens : 
 

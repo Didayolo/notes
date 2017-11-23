@@ -9,6 +9,7 @@
 - TC5 : Traitement des images et du signal
 - TC6 : Science des données pour le Big Data
 - OPT5 : Apprentissage par renforcement
+- OPT6 : Apprentissage avancé
 - OPT7 : Apprentissage à partir de données structurées
 - OPT8 : Deep Learning
 

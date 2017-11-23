@@ -1,6 +1,6 @@
 # TC1 : Apprentissage
 
-Par A. Allauzen et M. Sebag
+Par Alexandre Allauzen et Michèle Sebag
 
 ### Liens : 
 

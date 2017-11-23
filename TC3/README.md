@@ -1,6 +1,6 @@
 # TC3 : Traitement Automatique des Langues
 
-Par A. L. Ligozat
+Par Anne-Laure Ligozat
 
 ## Liens :
 

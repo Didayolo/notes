@@ -1,6 +1,6 @@
 # OPT5 : Apprentissage par renforcement
 
-Par A. Allauzen et M. Sebag
+Par Alexandre Allauzen et Michèle Sebag.
 
 ### Liens : 
 

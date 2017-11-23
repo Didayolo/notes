@@ -1,7 +1,6 @@
 # TC5 : Traitement des images et du signal
 
 Par Yohann Tendero.
-Contact : yohann.tendero@telecom-paristech.fr
 
 ## Liens :
 

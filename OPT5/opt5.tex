@@ -47,7 +47,28 @@ L'horizon temporelle est notée H et peut être fini (problème épisodique) ou 
 
 \section{Equation de Bellman}
 
-A venir.
+\begin{itemize}
+
+\item \textbf{La fonction d'évaluation V} décrit les meilleurs valeurs possibles de l'objectif selon l'état. Le calcul de V nous permet d'avoir également la fonction a(x) decrivant l'action optimale selon l'état : la fonction de politique.
+
+\item \textbf{L'équation de Bellman} est une condition nécessaire d'optimalité. Elle permet de connaitre la fonction d'évaluation V optimale et la politique optimale. 
+
+\end{itemize}
+Voici l'équation générale\footnote{https://en.wikipedia.org/wiki/Bellman\_equation} :
+
+% Wiki
+%\[ V(s) = max_{a \in \Gamma(x)} (F(x, a) + \Beta V(T(x, a))) \]
+\[ V(x) = \max_{a \in \Gamma (x) } \{ F(x,a) + \beta V(T(x,a)) \} \]
+
+Dans le cas des processus de décision de Markov, l'équation de Bellman est une récursion des récompenses attendues :
+
+\[ V(s) = r(s) + \gamma \sum_{s'} p(s, \pi(s), s') V(s') \]
+
+Il s'agit d'une équation fonctionnelle, dont l'inconnue est la fonction V. On voit que cela consiste en la somme de la récompense à l'état s et de $\gamma$ fois la somme des évaluations des états suivants (par la politique $\pi$ et pondéré par les probabilités dans le cas d'un problème non-déterministe). La récursion s'arrête aux états finaux. La \textbf{stratégie optimale} est celle qui maximise V ?
+
+\textbf{Hypothèse.} Dans le cas déterministe : 
+
+\[ V(s) = r(s) + \gamma V(s') \]
 
 \end{document}
 

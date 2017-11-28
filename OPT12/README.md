@@ -1,8 +1,9 @@
 # OPT12 : Reconnaissance et interaction vocale
 
-![Reconnaissance vocale](opt12.png)
+Par C. Barras, G. Richard, A. Allauzen, L. Devillers et C. Clavel.
 
-
-## Liens
+## Liens :
 
 - [Page du cours](https://perso.limsi.fr/barras/parole/)
+
+![Reconnaissance vocale](opt12.png)

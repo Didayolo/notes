@@ -2,7 +2,7 @@
 
 ## Cours :
 
-- TC1 : Apprentissage
+- [TC1](TC1) : Apprentissage
 - TC2 : Optimisation
 - TC3 : Traitement Automatique des Langues
 - TC4 : Algorithmes d'inférence et d'apprentissage à grande échelle
@@ -12,6 +12,8 @@
 - OPT6 : Apprentissage avancé
 - OPT7 : Apprentissage à partir de données structurées
 - OPT8 : Deep Learning
+- OPT9 : Extraction d'information : des documents aux interfaces
+- OPT12 : Reconnaissance et interaction vocale
 
 ## Liens :
 

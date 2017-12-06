@@ -25,7 +25,19 @@ Apprentissage avancé. Le domaine de l'apprentissage automatique évolue vite.
 \item Apprentissage PAC : Probably Approximately Correct\footnote{https://en.wikipedia.org/wiki/Probably\_approximately\_correct\_learning}.
 \item \textbf{No-free-lunch theorem :} Il n'existe pas de méthode d'apprentissage qui soit meilleure qui les autres. Même performance que l'aléatoire sur l'ensemble des problèmes possibles. Si une méthode est efficace sur un problème elle sera mauvaise sur un autre. L'intégrale sur tous les problèmes est toujours la même, quelque soit la méthode. Idem pour les mesures (de distance par exemple). Les méthodes sont adaptées à des \textbf{classes} de problèmes. \textbf{Tous les algorithmes inductifs se valent.}
 \item \textbf{Adversarial learning :} L'intersection entre le machine learning et la sécurité informatique.
-\item Ordre $L_0$, $L_1$ $\rightarrow$ à chercher. 
+\item \textbf{Régularisation :} Un processus consistant à ajouter de l'information à un problème pour éviter le surapprentissage. Cette information prend généralement la forme d'une pénalité envers la complexité du modèle. On peut relier cette méthode au principe du \textbf{rasoir d'Occam}. D'un point de vue bayésien, l'utilisation de la régularisation revient à imposer une distribution a priori sur les paramètres du modèle.
+
+Une méthode généralement utilisée est de pénaliser les valeurs extrêmes des paramètres, qui correspondent souvent à un surapprentissage. Pour cela, on va utiliser une norme sur ces paramètres, que l'on va ajouter à la fonction qu'on cherche à minimiser. Les normes les plus couramment employées pour cela sont $L_1$ et $L_2$.
+
+\item Différentes normes permettent de calculer la taille totale d'un vecteur ou d'une matrice dans un espace vectoriel. Quelques exemples courants : 
+
+      Norme $L_0$ :
+            \[ ||x||_0 = \sqrt[0]{\sum_i x_i^0} \]
+      Norme $L_1$ :
+            \[ ||x||_1 = \sum_i |x_i| \]
+      Norme $L_2$ :
+            \[ ||x||_2 = \sqrt{\sum_i x^2_i} \]
+            
 \item \textbf{Distance de Manhattan :} La distance entre deux points lorsque les déplacements sont faits selon un réseau ou un quadrillage. 
 
 \begin{figure}[H]

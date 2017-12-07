@@ -17,7 +17,13 @@
 
 \section{Introduction}
 
-Apprentissage avancé. Le domaine de l'apprentissage automatique évolue vite.
+L'apprentissage automatique (machine learning) s'appuie sur des bases théoriques. Ce domaine évolue vite et on y trouve des théories et techniques avancées.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{outline.png}
+  \caption{Les points qui seront abordés dans ce cours.}
+\end{figure}
 
 \subsection{Quelques notions}
 \begin{itemize}
@@ -122,6 +128,16 @@ C'est donc la moyenne des distances entre les prédictions avec h et les valeurs
 
 On cherche les liens entre toutes ces notions.
 
+\subsubsection*{Pour Vladimir Vapnik}
+
+Plutôt que de minimiser le risque empirique : 
+\begin{itemize}
+\item Pour une hypothèse h : $ P_{S \sim P_{XY}} (\hat{R}(h) = 0 \wedge R(h) > \epsilon ) $
+\end{itemize}
+On ne veux pas d'une hypothèse qui paraisse bonne mais qui soit en réalité mauvaise. Le principe de minimisation du risque empirique n'est sain que s'il y a des contraintes sur l'espace des hypothèses.
+
+(formule et principe de consistance universelle ?)
+
 \section{Transduction}
 
 On ne s'interesse qu'à un point. Le nombre de données requises pour tirer une conclusion n'est plus influencé par le nombre de dimension. On parle de \textbf{transductive learning}.
@@ -129,6 +145,17 @@ On ne s'interesse qu'à un point. Le nombre de données requises pour tirer une 
 \item Transduction : Cas d'induction limite (une question).
 \item Analogie : Cas de transduction limite (un exemple).
 \end{itemize}
+
+\section{Analyse du perceptron}
+
+\begin{enumerate}
+\item On suppose que l'ensemble des hypothèses H est fini.
+\item \textbf{Cas réalisable :} $ \exists h \in H tq R(h) = 0 $ ($ \ne 0 \rightarrow$ cas non-réalisable.)
+\item S est supposé tiré \textit{i.i.d.}
+\end{enumerate}
+
+Dimension Vapnik-Chervonenkis
+
 \end{document}
 
 

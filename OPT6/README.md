@@ -6,3 +6,5 @@ Par Antoine Cornuéjols
 
 - [Le site du professeur](http://www.agroparistech.fr/ufr-info/membres/cornuejols/Teaching/index.html)
 - [L'ancien site du professeur](https://www.lri.fr/~antoine/)
+
+![Advanced learning](opt6.png)

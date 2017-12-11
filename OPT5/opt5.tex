@@ -70,6 +70,20 @@ Il s'agit d'une équation fonctionnelle, dont l'inconnue est la fonction V. On v
 
 \[ V(s) = r(s) + \gamma V(s') \]
 
+\section{Dilemme Exploration Exploitation}
+
+Exemple du bandit manchot. Doit-on exploiter le bras que l'on estime être le meilleur ou bien explorer plus pour peut-être trouver un bras plus rentable ?
+
+\subsection*{Regret}
+
+Dans un problème de bandit manchot, le regret après K essais est défini comme la différence entre la récompense que l'on obtiendrait en utilisant K fois la meilleur machine et l'espérance de la récompense après K essais :
+
+\[ r_K = K\mu^* - \sum_{k=1}^K E(\mu_{I_k}) \]
+
+\subsection*{Inégalité de Hoeffding}
+
+Soit $r_1$, ..., $r_n$ i.i.d. dans [0, 1] ... Voir cours.
+
 \end{document}
 
 

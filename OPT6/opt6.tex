@@ -83,9 +83,11 @@ Les frontières entre ces types d'apprentissage peuvent être floues, on peut pa
 
 \subsection{Différentes méthodes d'apprentissage}
 
+Dans ce cours nous allons aborder différentes méthodes d'apprentissage.
+
 \begin{itemize}
 
-\item Méthodes d'ensemble (clustering).
+\item Méthodes d'ensemble : Combiner plusieurs hypothèse (exemple : boosting).
 
 \item Supervisé.
 
@@ -120,7 +122,7 @@ On distingue deux types de risques :
 \item \textbf{Risque réel} (ce que l'on veut minimiser). La performance à venir si j'utilise l'hypothèse h. Cela prend la forme d'une espérance de coût d'usage de h. Le risque réel (loss function) : 
 \[ R(h) = \displaystyle \int_X^Y l(h(x), y) p(x, y) \mathrm{d}x \mathrm{d}y \]
 
-La meilleure hypothèse est $k\star = Argmin R(h)$ avec $h \in H$. En d'autres termes, on cherche l'hypothèse qui minimise le risque réel. $l$ est la métrique d'évaluation et $p$ la loi de probabilité hypothétique ayant générée la distribution des données.
+La meilleure hypothèse est $k^* = Argmin R(h)$ avec $h \in H$. En d'autres termes, on cherche l'hypothèse qui minimise le risque réel. $l$ est la métrique d'évaluation et $p$ la loi de probabilité hypothétique ayant générée la distribution des données.
 \item \textbf{Risque empirique}. Puisque l'on cherche la loi de probabilité, on ne la connait pas et on ne peut donc pas s'en servir pour calculer le risque, en pratique. On calcul donc le risque empirique : 
 \[ \hat{R}(h) = \frac{1}{m} \sum_{i=1}^m l(h(x_i), y_i) \]
 C'est donc la moyenne des distances entre les prédictions avec h et les valeurs réelles des données. \^h est l'hypothèse minimisant le risque empirique. 
@@ -146,7 +148,9 @@ On ne s'interesse qu'à un point. Le nombre de données requises pour tirer une 
 \item Analogie : Cas de transduction limite (un exemple).
 \end{itemize}
 
-\section{Analyse du perceptron}
+\section{Possibilités d'apprendre}
+
+\subsection{Perceptron}
 
 \begin{enumerate}
 \item On suppose que l'ensemble des hypothèses H est fini.
@@ -154,7 +158,23 @@ On ne s'interesse qu'à un point. Le nombre de données requises pour tirer une 
 \item S est supposé tiré \textit{i.i.d.}
 \end{enumerate}
 
-Dimension Vapnik-Chervonenkis
+
+\subsection{Dimension Vapnik-Chervonenkis}
+
+La $d_{VC}$ est la taille du plus grand ensemble de points tirés aléatoirement que l'on peut pulvériser, c'est-à-dire que l'on peut étiqueter n'importe comment en utilisant une hypothèse de H.
+
+$d_{VC}(H)$ donne une idée de l'expressivité du modèle (de l'espace de réalisation).
+
+\subsection{Apprentissage faible et fort}
+
+\begin{itemize}
+\item \textbf{Apprenant faible :} Erreur réelle $< \frac{1}{2} - \gamma$, $\gamma > 0$. Typiquement un decision stump.
+\item \textbf{Apprenant fort :} On peut être infiniment exigeant. $\forall \epsilon$, $\forall \delta$, avec suffisamment d'exemples, A trouvera une hypothèse h d'erreur réelle $< \epsilon$ dans plus de $1 - \delta$ des cas (échantillons). Dans le cas réalisable.
+\end{itemize}
+
+\subsection{Borne sur le risque réel}
+
+\includegraphics[scale=0.4]{risk_bound.png}
 
 \end{document}
 

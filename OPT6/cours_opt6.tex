@@ -89,7 +89,7 @@ Dans ce cours nous allons aborder différentes méthodes d'apprentissage.
 
 \item Méthodes d'ensemble : Combiner plusieurs hypothèse (exemple : boosting).
 
-\item Supervisé.
+\item Supervisé. La méthode classique d'apprentissage passif est appelé \textit{apprentissage batch}. C'est la technique la plus utilisée aujourd'hui.
 
 \item L'induction :
     \begin{itemize}
@@ -165,6 +165,20 @@ La $d_{VC}$ est la taille du plus grand ensemble de points tirés aléatoirement
 
 $d_{VC}(H)$ donne une idée de l'expressivité du modèle (de l'espace de réalisation).
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{dimension_vc1.png}
+  \caption{Pulvérisation de 3 points}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{dimension_vc2.png}
+  \caption{Lorsqu'il y a 4 points, la pulvérisation est impossible}
+\end{figure}
+
+$d_{VC}$ de l'ensemble des droites = 3.
+
 \subsection{Apprentissage faible et fort}
 
 \begin{itemize}
@@ -176,6 +190,209 @@ $d_{VC}(H)$ donne une idée de l'expressivité du modèle (de l'espace de réali
 
 \includegraphics[scale=0.4]{risk_bound.png}
 
+\section{Apprentissage à partir de flux de données}
+
+\subsection{Flux de données}
+
+Un flux de données, ou data stream, est une séquence de mesures 
+\begin{align}
+ S = <x_1, x_2, ..., x_t, ...> \\
+ S = <(\underbrace{x_1}_{\hat{y}_1}, y_1),(\underbrace{x_2}_{\hat{y}_2}, y_2), ..., (\underbrace{x_t}_{\hat{y}_t}, y_t), ...>
+\end{align}
+
+\subsection{Plusieurs séquences}
+
+\begin{itemize}
+\item Clustering
+\item Classification supervisée
+\end{itemize}
+
+Nécessite la définition d'une distance appropriée. On ne peut pas permuter les éléments de la séquence sans modifier le problème. \\
+Exemple : Génomes, distances d'édition, programmation dynamique.
+
+\subsection*{Tâches classiques}
+
+\subsection{Prédiction (une séquence)}
+
+\begin{itemize}
+\item ARIMA : régression linéaire
+
+ 
+\item Chaines de Markov
+\item HMM (Modèle de Markov Caché)
+
+\item Grammaires
+\item Réseaux de neurones récurrents
+
+\end{itemize}
+
+Données discretisées (peu de symbols) dans le cas des chaines de Markov et des HMM.
+
+\subsection{Apprentissage en ligne (online learning)}
+
+Apprentissage en cours de route.
+
+L'apprentissage par renforcement peut être vu comme une sorte d'apprentissage en ligne.
+
+\begin{enumerate}
+\item Scénario :
+
+\[ \underbrace{x_1 \rightarrow \hat{y}_1 = h_{1}(\vec{x_1}) \leftrightarrow y1}_{h_2} \]
+\[ \underbrace{x_2 \rightarrow \hat{y}_2 = h_{2}(\vec{x_2}) \leftrightarrow y2}_{h_h} \]
+% mmh ...
+
+\item Motivations pour ce scénario
+\begin{itemize}
+\item Cadre Anytime : même en environnement stationnaire
+\item Environnement non stationnaire.
+      \begin{itemize}
+      \item Types de changements : Sur $P_x$ : \textbf{covariate shift}.
+      \item Sur $P_{Y|X}$ : \textbf{concept drift} (dérive de concept).
+      \end{itemize}
+\item Données très volumineuses.
+      \begin{itemize}
+      \item Adaptation de domaine (domain adaptation) : "en gros" covariate shift.
+      \item Apprentissage par transfert (transfer learning) : changement de tâche.
+      \end{itemize}
+\end{itemize}
+\end{enumerate}
+
+\subsection{Apprentissage incrémental}
+
+\begin{itemize}
+\item Environnement stationnaire.
+\item Séquence pédagogique pour apprendre un concept complexe.
+\end{itemize}
+
+\subsubsection*{Evaluation de l'apprentissage}
+
+Comment faire en environnement non stationnaire ? On ne peux plus utiliser le risque empirique. Prequential criterion. Nombre d'erreurs de prédiction commises sur un intervalle T.
+
+\subsubsection*{Comment réaliser l'apprentissage}
+
+\[ A : H \times X \times Y \]
+\[ (h_t, x_t, y_t) \rightarrow h_{t+1} \]
+
+\subsection{Experts : un scénario maximaliste}
+
+\begin{itemize}
+\item La théorie de l'apprentissage en ligne (online learning theory).
+\item Contre toute séquence y compris les séquences adverserielles.
+\item Notion de "\textbf{comité d'experts}".
+\item Ensemble de N "experts".
+\item Expert : $x \rightarrow$ y.
+\item Aucune hypothèse sur le fonctionnement interne des experts (statique, dynamique...)
+\end{itemize}
+
+(0 $\rightarrow$ bonne réponse, 1 $\rightarrow$ erreur)
+
+\begin{figure}[H]
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \_ & Expert 1 & Expert 2 & Expert 3 & Expert 4 & Expert 5 & Expert 6 \\
+    \hline
+    Exemple 1 & 1 & 0 & 0 & 1 & 0 & 1 \\
+    Exemple 2 & \_ & \_ & \_ & \_ & \_ & \_ \\
+    \hline 
+\end{tabular}
+\end{figure}
+
+Ressemblance avec les bandits manchots. Les concepts de dilemme exploration-exploitation et de regret s'appliquent.
+
+\subsubsection{Algorithmes gloutons}
+
+\subsubsection*{Algorithme glouton déterministe}
+
+On prend à chaque étape l'expert qui a fait le moins d'erreur. Déterministe car on selectionne de gauche à droite quand il y a égalité, en partant (du suivant) du dernier que l'on a pris.
+
+\begin{figure}[H]
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \_ & Expert 1 & Expert 2 & Expert 3 & Expert 4 & Expert 5 & Expert 6 \\
+    \hline
+    Exemple 1 & 1 & [\textbf{0}] & 0 & 1 & 0 & 1 \\
+    Exemple 2 & 1 & 1 & 1 & 0 & [\textbf{0}] & 0 \\
+    Exemple 3 & 1 & [\textbf{0}] & 0 & 0 & 1 & 1 \\
+    \hline 
+\end{tabular}
+\end{figure}
+
+Le pire cas du glouton déterministe :
+
+\begin{figure}[H]
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \_ & Expert 1 & Expert 2 & Expert 3 & Expert 4 & Expert 5 & Expert 6 \\
+    \hline
+    Exemple 1 & [\textbf{1}] & 0 & 0 & 0 & 0 & 0 \\
+    Exemple 2 & 0 & [\textbf{1}] & 0 & 0 & 0 & 0 \\
+    Exemple 3 & 0 & 0 & [\textbf{1}] & 0 & 0 & 0 \\
+    \hline 
+\end{tabular}
+\end{figure}
+
+\[ \underbrace{L}_{\text{Perte algo}} \leq N(L^{*}) + N - 1 \]
+
+Si l'adversaire tire profit de sa connaissance de l'algorithme, le glouton déterministe est très catastrophique. On peut éviter ça en tirant aléatoirement. Il s'agit donc du glouton aléatoire, ou glouton non-déterministe.
+
+\subsubsection*{Algorithme glouton aléatoire}
+
+Pire cas : 
+
+\[ L_{RG} \leq (ln N + 1)(L^{*}) + ln N \]
+
+C'est bien mieux.
+
+\subsubsection{Algorithmes de vote}
+
+\subsubsection*{Algorithme du vote majoritaire}
+
+\begin{itemize}
+\item \textbf{Cas réalisable :} un expert aura 0 erreur sur la séquence.
+
+A chaque erreur à l'instant t : 
+\[ W_{t+1} < \frac{W_t}{2} \]
+\[ L_{CR} \leq [log_2 N] \]
+
+\item \textbf{Cas non réalisable :} A $t = 0$, $W_0 = N$.
+
+Pour chaque expert i :
+\[ w_{i}(t+1) = \begin{cases}
+               w_{i}(t) \\
+               \beta w_{i}(t) \\
+               \beta \in [0, 1[ \\
+              \end{cases}
+\]
+
+Supposons qu'une erreur soit commise à l'instant t :
+
+\[ W(t+1) \leq \frac{W(t)}{2} + \beta \frac{W(t)}{2} \]
+
+Après m erreurs : 
+
+\[ W_m \leq W_0 \frac{(1 + \beta)^m}{2^m} \]
+
+\begin{center}
+Poids du meilleur expert $ = \beta^{m^{*}} $
+\end{center}
+
+\[ m \leq \frac{log_2 N + m^{*} log_2 (\frac{1}{\beta})}{log_2 \frac{2}{1 + \beta}} \]
+
+\end{itemize}
+
+\subsection{Approches heuristiques}
+
+Dérive de concept (continu, des ruptures rares).
+
+\subsubsection*{Le compromis plasticité-stabilité}
+
+\begin{itemize}
+\item \textbf{Stabilité :} Interêt à considerer un maximum de données
+\item \textbf{Plasticité :} Pouvoir s'adapter si le concept change, savoir oublier.
+\end{itemize}
+
 \end{document}
+
+
 
 

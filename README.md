@@ -2,19 +2,19 @@
 
 ## Cours :
 
-- [TC1](TC1) : Apprentissage
-- [TC2](TC2) : Optimisation
-- [TC3](TC3) : Traitement Automatique des Langues
-- [TC4](TC4) : Algorithmes d'inférence et d'apprentissage à grande échelle
-- [TC5](TC5) : Traitement des images et du signal
-- [TC6](TC6) : Science des données pour le Big Data
-- [OPT1](OPT1) : Data Camp
-- [OPT5](OPT5) : Apprentissage par renforcement
-- [OPT6](OPT6) : Apprentissage avancé
-- [OPT7](OPT7) : Apprentissage à partir de données structurées
-- [OPT8](OPT8) : Deep Learning
-- [OPT9](OPT9) : Extraction d'information : des documents aux interfaces
-- [OPT12](OPT12) : Reconnaissance et interaction vocale
+- [TC1](Cours/TC1) : Apprentissage
+- [TC2](Cours/TC2) : Optimisation
+- [TC3](Cours/TC3) : Traitement Automatique des Langues
+- [TC4](Cours/TC4) : Algorithmes d'inférence et d'apprentissage à grande échelle
+- [TC5](Cours/TC5) : Traitement des images et du signal
+- [TC6](Cours/TC6) : Science des données pour le Big Data
+- [OPT1](Cours/OPT1) : Data Camp
+- [OPT5](Cours/OPT5) : Apprentissage par renforcement
+- [OPT6](Cours/OPT6) : Apprentissage avancé
+- [OPT7](Cours/OPT7) : Apprentissage à partir de données structurées
+- [OPT8](Cours/OPT8) : Deep Learning
+- [OPT9](Cours/OPT9) : Extraction d'information : des documents aux interfaces
+- [OPT12](Cours/OPT12) : Reconnaissance et interaction vocale
 
 ## Liens :
 

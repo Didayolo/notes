@@ -8,6 +8,7 @@
 - [TC4](TC4) : Algorithmes d'inférence et d'apprentissage à grande échelle
 - [TC5](TC5) : Traitement des images et du signal
 - [TC6](TC6) : Science des données pour le Big Data
+- [OPT1](OPT1) : Data Camp
 - [OPT5](OPT5) : Apprentissage par renforcement
 - [OPT6](OPT6) : Apprentissage avancé
 - [OPT7](OPT7) : Apprentissage à partir de données structurées

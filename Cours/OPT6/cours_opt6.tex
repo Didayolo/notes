@@ -391,6 +391,62 @@ Dérive de concept (continu, des ruptures rares).
 \item \textbf{Plasticité :} Pouvoir s'adapter si le concept change, savoir oublier.
 \end{itemize}
 
+\section{Apprentissage par transfert et adaptation de domaine}
+
+Notations usuelles : 
+\begin{itemize}
+\item S : Domaine source
+\item T : Domaine cible
+\item $D_s (P_x^s)$ : Distribution des exemples sources
+\item $D_s (P_x^T)$ : Distribution des exemples cibles
+\item $h_s$ : Hypothèse apprise sur la source
+\item $h_T$ : Hypothèse apprise sur la cible
+\item $S_s$ : Echantillon de données sources
+\item $S_T$ : Echantillon de données cibles
+\end{itemize}
+
+En vrac :
+
+\begin{itemize}
+
+\item Souvent, on suppose que $ |S_T| << |S_s| $.
+
+\item La \textbf{divergence de Kullback-Leibler} est une mesure de dissimilarité entre deux distributions de probabilités P et Q.
+
+\item Jeu pathologique : Plus on explore loin, plus on perd d'information.
+
+\end{itemize}
+
+\subsection{Définition et illustration}
+
+\begin{center} Source $X_s \rightarrow y_s $ \end{center}
+\begin{center} Cible $X_T \rightarrow y_T $ \end{center}
+$$ X \rightarrow Y $$
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{domain_transfer.png}
+  \caption{Exemples de transferts de domaine}
+\end{figure}
+
+Les trois grandes approches (slides 87) :
+
+\begin{itemize}
+\item Instance-based method : reweighting
+\item Features-based method : find new representation spaces
+\item Iterative method : adjustement
+\end{itemize} 
+
+\subsection{Une approche de l'apprentissage par transfert}
+
+Le problème motivant le travail.
+Classification précoce de série temporelles.
+On va apprendre des fonctions de $ X_t \rightarrow \underbrace{X_s}_{\text{Toutes les mesures possibles}} $
+
+On apprend des fonctions $\pi_i$ par le boosting. A la fin :
+
+$$ H(\vec{x}_t) = signe \bigg\{ \sum_{i=1}^N \alpha_i h_s \circ \underbrace{\pi_i(\vec{x}_t)}_{\in X_s} \bigg\} $$
+
 \end{document}
 
 

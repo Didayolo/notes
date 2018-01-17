@@ -6,3 +6,4 @@ Par Anne Vilnat.
 
 - [Cours d'Anne Vilnat](https://perso.limsi.fr/anne/MRTAL.html)
 - [Cours de Pierre Zweigenbaum](https://perso.limsi.fr/pz/upsay/)
+- [Site de Sophie Rosset](https://sophierosset.github.io/)

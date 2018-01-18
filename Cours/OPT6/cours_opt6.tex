@@ -393,6 +393,13 @@ Dérive de concept (continu, des ruptures rares).
 
 \section{Apprentissage par transfert et adaptation de domaine}
 
+Utilités principales : 
+
+\begin{itemize}
+\item Gain d'information : Si je n'ai pas assez d'information dans mon domaine cible, l'apprentissage du domaine source améliore mes performances
+\item Gain de temps : On n'apprend pas à nouveau sur le domaine cible
+\end{itemize}
+
 Notations usuelles : 
 \begin{itemize}
 \item S : Domaine source
@@ -435,7 +442,7 @@ Les trois grandes approches (slides 87) :
 \item Instance-based method : reweighting
 \item Features-based method : find new representation spaces
 \item Iterative method : adjustement
-\end{itemize} 
+\end{itemize}
 
 \subsection{Une approche de l'apprentissage par transfert}
 
@@ -446,6 +453,116 @@ On va apprendre des fonctions de $ X_t \rightarrow \underbrace{X_s}_{\text{Toute
 On apprend des fonctions $\pi_i$ par le boosting. A la fin :
 
 $$ H(\vec{x}_t) = signe \bigg\{ \sum_{i=1}^N \alpha_i h_s \circ \underbrace{\pi_i(\vec{x}_t)}_{\in X_s} \bigg\} $$
+
+\subsection{Questions}
+
+\subsubsection*{Que transfert-on généralement dans les réseaux neuronnaux profonds ?}
+
+On garde les premières couches et on ré-apprend les dernières couches. Les premières couches capturent les descripteurs pertinents pour la tâche source que l'on suppose pertinent pour la tâche cible. On espère qu'il représente les aspects généraux du problèmes, tandis que les dernières couches sont plus spécialisées.
+
+\subsubsection*{Comment évaluer la distance entre une hypothèse source et une hypothèse cible ?}
+\begin{itemize}
+\item Nombre de ``projecteurs" nécessaire pour assurer le transfert entre $h_s$ et $h_t$.
+\item Un ensemble de test et on mesure $|err(h_s) - err(h_t)|$
+\item Facilité de trouver des projecteurs
+\end{itemize}
+
+\subsubsection*{Quels sont les critères qui devraient jouer un rôle dans le succès d'un transfert ?}
+
+\begin{itemize}
+\item Le degré de similarité entre tâches source et cible.
+\item Information cible : 
+\begin{itemize}
+\item Taille de $S_t$ suffisante
+\item Pas trop de bruit
+\end{itemize}
+\item Il faut une "capacité" de l'espace des projecteurs limités
+\item La performance de $h_s$ (sur la source)
+\end{itemize}
+
+\section{Le filtrage collaboratif}
+
+\subsection{Introduction}
+L'objectif est de selectionner les "articles" pertinents pour vous.
+\begin{itemize}
+\item 1960s : Par mots clés prédéfinis (peu performant).
+\item 1980s : Apprendre les mots-clés $\rightarrow$ variables latentes. Il s'agit d'une approche par le contenu.
+\item 1994 : Premier papier décrivant les bases du collaborative filtering. On va tirer profit des préférences émises par les autres utilisateurs (en fonction de leur ressemblance avec l'utilisateur cible).
+\item 2001 : Amazon, fait son coming out
+\item 2006 : Prix Netflix
+    \begin{itemize}
+    \item $\sim$ 100 000 000 de préférences émises (notes entre 1 et 5)
+    \item $\sim$ 500 000 utilisateurs $\rightarrow$ chaque utilisateur avait noté 200 films en moyenne
+    \item $\sim$ 25 000 films
+    \end{itemize}
+    Les données sont incomplètes. Pour mesurer la performance : 
+    $$ Perf = \frac{1}{m} \sum (\underbrace{r_{ij}}_{\text{Vraie note}} - \underbrace{\hat{r}_{ij}}_{\text{Note estimée}})^2 $$
+\end{itemize}
+
+\subsection{Les grandes approches}
+
+\subsubsection{Approches basées sur le contenu (content-based)}
+
+Exemples de problèmes, notation de films par des utilisateurs. On a 4 clients et 5 films. Chaque utilisateur, à chaque film, donne ou non une note entre 0 et 5. On a des informations sur les films (taux de romance, taux d'action) pour définir les genres. Ce sont les descripteurs de film.
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c|c}
+- & Alice & Bob & Fred & Marie & Romance & Action \\
+\hline
+Film 1 & 2 & ? & 4 & 0 & 0.2 & 0.9 \\
+... & ... & ... & ... & ... & ... & ...
+\end{tabular}
+\end{center}
+
+On modélise cela par un modèle linéaire. \\
+Fonction : $utilisateur * film \rightarrow \mathbb{R}^n$ dans [0, 5]. \\
+$u(x) = u_1 * x_1 + u_2 * x_2 + u_3$. Le dernier u est le biais. \\
+On a donc un problème d'optimisation. Pour un utilisateur i :
+$$ \vec{u}_i^* = Argmin { \sum (R_{ij} - < \vec{u}_i, \vec{x}_j >)^2 + \underbrace{\alpha || \vec{u}_i ||^2}_{\text{Terme de régularisation}} } $$
+
+Procédé de descente du gradient ($\eta$ le pas d'apprentissage) :
+$$ \vec{u}_i \leftarrow \vec{u}_i + \eta { \sum - (R_{i, j} - < \vec{u}_i, \vec{x}_j >) \vec{u}_i } $$
+
+Remarques :
+\begin{itemize}
+\item Un modèle par utilisateur (pas de liens entre les modèles)
+\item Problème du choix des descripteurs
+\end{itemize}
+
+\subsubsection{Approches utilisant la similarité entre utilisateurs}
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+
+- & Item 1 & Item 2 & Item 3 & Item 4 \\
+\hline
+Jean & - & 2 & 7 & 8 \\
+Marie & 4 & 1 & - & 7 \\
+Chistian & 3 & 8 & - & 4
+
+\end{tabular}
+\end{center}
+
+\textbf{Calcul de similarité entre les lignes} \\
+Formule de Bravais-Pearson : 
+$$ p = \frac{Cov(\vec{R}_i, \vec{R}_j)}{\sqrt{Var(\vec{R}_i) * Var(\vec{R}_j)}} = \frac{\sum_k (R_{i,k} - \bar{R_i})(R_{j,k} - \bar{R_j})}{\sqrt{\sum_k (R_{i,k} - \bar{R_i})}^2 \sqrt{\sum_k (R_{j,k} - \bar{R_j})}^2} $$
+
+\begin{itemize}
+\item k : nombre de plus proches voisins pris en compte
+\item $u_v$ : un utilisateur voisin
+\end{itemize}
+
+$$ \hat{R}_{l, j} = \bar{R_l} + \frac{\sum_{v=1}^k r(u_l, u_v) (R_{v,j} - \bar{R_v})}{\sum_{v=1}^k | r(u_l, u_v) |} $$
+
+\subsubsection{Approches par factorisation de matrice}
+
+On aimerait appliquer la \textbf{décomposition en valeurs singulières} (SVD). Cependant, cela ne marche pas directement. Lorsque la matrice X est creuse, on ne peut pas utiliser la SVD. En 2006, Simon Funk suggère de passer outre.
+
+Deux grandes familles de méthodes d'optimisation (slide 44) : 
+\begin{enumerate}
+\item Par gradient stochastique
+\item Par optimisation alternée sur les utilisateurs et les items
+\end{enumerate}
 
 \end{document}
 

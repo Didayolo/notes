@@ -13,7 +13,6 @@
 - [OPT6](Cours/OPT6) : Apprentissage avancé
 - [OPT7](Cours/OPT7) : Apprentissage à partir de données structurées
 - [OPT8](Cours/OPT8) : Deep Learning
-- [OPT9](Cours/OPT9) : Extraction d'information : des documents aux interfaces
 - [OPT12](Cours/OPT12) : Reconnaissance et interaction vocale
 
 ## Liens :
@@ -22,4 +21,4 @@
 - [Présentations des différents cours](https://drive.google.com/drive/folders/0B6bFVfow2ez_SVVzamQ4ZGRocUU)
 - [La page des cours sur le site de l'équipe TAO](https://tao.lri.fr/courses)
 - [La page AIC sur le site du responsable](https://allauzen.github.io/cours/AIC/)
-- [Un drive contenant des fichiers utiles](https://ocsync.limsi.fr/index.php/s/TETPT57yxziIN8R)
+- [Un cloud contenant des fichiers utiles](https://ocsync.limsi.fr/index.php/s/TETPT57yxziIN8R)

@@ -84,6 +84,65 @@ Dans un problème de bandit manchot, le regret après K essais est défini comme
 
 Soit $r_1$, ..., $r_n$ i.i.d. dans [0, 1] ... Voir cours.
 
+\section{Les deux grandes approches}
+
+\begin{itemize}
+    \item \textbf{Model-free :} L'agent connait S et A mais pas P et R. On ne peut pas faire de programmation dynamique. Les valeurs sont estimées à partir d'interactions directes avec l'environnement (only rely on actual observations).
+    \item \textbf{Model-based :} L'agent connaît S, A, P et dans certains cas R aussi.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{c|c}
+    Model-free & Model-based \\
+    \hline
+    Q-Learning & Value Iteration \\
+    Monte Carlo & Policy Iteration/Improvement \\
+    Temporal Difference & Policy Evaluation \\
+\end{tabular}
+\end{center}
+
+TD peut se faire sur V ou sur Q (SARSA)
+
+\vspace{0.5cm}
+
+L'algorithme Dyna combine à la fois une approche model-free et une approche model-based. 
+
+\section{Méthode UCB1}
+
+Algorithme sur les bandits manchots, Upper Confidence Bound.
+
+\begin{enumerate}
+    \item On tire chaque machine une fois.
+    \item On calcule le score UCB1 de chaque machine à l'aide de la formule suivante : $$ UCB1_j = m_j + \sqrt{\frac{2 ln(n)}{n_j}} $$ avec $m_j$ le score moyen de la machine j, $n_j$ le nombre de fois qu'elle a été tirée et $n$ le nombre de tirages totale. \\ On tire la machine avec le plus grand score.
+    \item Étape 2 en boucle.
+\end{enumerate}
+
+Le premier terme de la formule représente donc l'exploitation et le second l'exploration.
+
+Cette méthode garanti une borne à la probabilité que la moyenne empirique dévie de l'espérance selon :
+
+$$ P(y + a < \mu) \leq e^{-2na^2} $$
+
+Ou un truc du genre. \\
+Avec Y la moyenne des tirages, ou je sais pas quoi.
+
+\section{Monte Carlo Tree Search}
+
+\begin{itemize}
+    \item \textbf{Selection:} start from root R and select successive child nodes down to a leaf node L. The section below says more about a way of choosing child nodes that lets the game tree expand towards most promising moves, which is the essence of Monte Carlo tree search.
+    \item \textbf{Expansion:} unless L ends the game with a win/loss for either player, create one (or more) child nodes and choose node C from one of them.
+    \item \textbf{Simulation:} play a random playout from node C. This step is sometimes also called playout or rollout.
+    \item \textbf{Backpropagation:} use the result of the playout to update information in the nodes on the path from C to R.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{mcts.png}
+    \caption{Schéma explicatif du MCTS}
+\end{figure}
+
 \end{document}
 
 
